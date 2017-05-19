@@ -1,18 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import {RouterModule, Routes} from '@angular/router';
 
 import { AppComponent } from './app.component';
+import {SharedModule} from "./shared/shared.module";
+
+export const AppRoutes: Routes = [
+  {path: '', loadChildren: './frontend/frontend.module#FrontendModule'},
+  {path: 'admin', loadChildren: './admin/admin.module#AdminModule'},
+];
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule
+    SharedModule,
+    RouterModule.forRoot(AppRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent]
