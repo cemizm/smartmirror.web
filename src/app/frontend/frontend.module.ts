@@ -1,10 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {TestComponent} from './test/test.component';
+import {SharedModule} from "../shared/shared.module";
+import {RouterModule, Routes} from "@angular/router";
+
+export const ModuleRoutes: Routes = [
+  {path: '', component: TestComponent},
+];
 
 @NgModule({
   imports: [
-    CommonModule
+    SharedModule,
+    RouterModule.forChild(ModuleRoutes)
   ],
-  declarations: []
+  declarations: [TestComponent]
 })
-export class FrontendModule { }
+export class FrontendModule {
+}
