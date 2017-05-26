@@ -8,7 +8,7 @@ import {SharedModule} from "./shared/shared.module";
 export const AppRoutes: Routes = [
   {path: 'frontend', loadChildren: './frontend/frontend.module#FrontendModule'},
   {path: 'admin', loadChildren: './admin/admin.module#AdminModule'},
-  {path: '', redirectTo: '/admin', pathMatch: 'full'},
+  {path: '', redirectTo: '/frontend', pathMatch: 'full'},
 ];
 
 @NgModule({
