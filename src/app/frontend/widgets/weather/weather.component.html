@@ -1,1 +1,71 @@
-<p>{{test}}</p>
+<md-card class="Wetterkarte">
+  <md-card-header>
+    <md-card-title>Wetterinformationen</md-card-title>
+  </md-card-header>
+  <md-grid-list cols="4" rowHeigt="100px">
+    <md-grid-tile>1</md-grid-tile>
+    <md-grid-tile>2</md-grid-tile>
+    <md-grid-tile>3</md-grid-tile>
+    <md-grid-tile>4</md-grid-tile>
+  </md-grid-list>
+</md-card>
+
+<md-card class="weather-card">
+  <md-card-header>
+    <md-card-title> Weather </md-card-title>
+    <md-card-subtitle>Weatherdata</md-card-subtitle>
+  </md-card-header>
+  <img md-card-image src="https://image.flaticon.com/icons/svg/248/248053.svg">
+</md-card>
+
+<md-card class="example-card">
+  <md-card-header>
+    <div md-card-avatar class="example-header-image"></div>
+    <md-card-title>Shiba Inu</md-card-title>
+    <md-card-subtitle>Dog Breed</md-card-subtitle>
+  </md-card-header>
+  <img md-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+  <md-card-content>
+    <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+      bred for hunting.
+    </p>
+  </md-card-content>
+  <md-card-actions>
+    <button md-button>LIKE</button>
+    <button md-button>SHARE</button>
+  </md-card-actions>
+</md-card>
+
+
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="start center" class="content">
+    <div class="blocks" fxFlex = "20%">1</div>
+    <div class="blocks" fxFlex = "60%">2</div>
+    <div class="blocks" fxFlex>3</div>
+  </div>
+</div>
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="space-around center" class="content">
+    <div class="blocks">1</div>
+    <div class="blocks">2</div>
+    <div class="blocks">3</div>
+  </div>
+</div>
+<div class="container">
+  <div fxLayout="row" fxLayoutAlign="begin center" class="content">
+    <div class="blocks">1</div>
+    <div class="blocks">2</div>
+    <div class="blocks">3</div>
+  </div>
+</div>
+<div class="container">
+  <div fxLayout="row"
+       fxLayout.xs="column"
+       fxLayout.sm="column"
+       fxFlex class="contentResp">
+    <div class="blocks" fxFlex> I'm above on mobile, and to the left on larger devices.   </div>
+    <div class="blocks" fxFlex> I'm below on mobile, and to the right on larger devices.  </div>
+  </div>
+</div>
