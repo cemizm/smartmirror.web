@@ -3,8 +3,14 @@ import {CommonModule} from '@angular/common';
 import {TestComponent} from './test/test.component';
 import {SharedModule} from "../shared/shared.module";
 import {RouterModule, Routes} from "@angular/router";
-import {WeatherComponent} from "./widgets/weather/weather.component";
-import { NotizComponent } from './widgets/notiz/notiz.component';
+import {WeathercurrentComponent} from "./widgets/weathercurrent/weathercurrent.component";
+import { WeatherpreviewComponent } from './widgets/weatherpreview/weatherpreview.component';
+import { NoteComponent } from './widgets/note/note.component';
+import { MailsComponent } from './widgets/mails/mails.component';
+import { NewsComponent } from './widgets/news/news.component';
+import { CalenderdayComponent } from './widgets/calenderday/calenderday.component';
+import { CalenderweekComponent } from './widgets/calenderweek/calenderweek.component';
+import { CalendermonthComponent } from './widgets/calendermonth/calendermonth.component';
 
 export const ModuleRoutes: Routes = [
   {path: '', component: TestComponent},
@@ -15,7 +21,7 @@ export const ModuleRoutes: Routes = [
     SharedModule,
     RouterModule.forChild(ModuleRoutes)
   ],
-  declarations: [TestComponent, WeatherComponent, NotizComponent]
+  declarations: [TestComponent, WeathercurrentComponent, NoteComponent, WeatherpreviewComponent, NewsComponent, CalenderdayComponent, MailsComponent, CalenderweekComponent, CalendermonthComponent]
 })
 export class FrontendModule {
 }

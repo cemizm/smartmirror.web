@@ -1,4 +1,15 @@
-<p>
-  frontend works!
-<app-weather></app-weather>
-</p>
+<div fxLayout="row" fxLayoutAlign="stretch stretch">
+  <div fxLayout="column" fxFlex="25%" fxLayoutGap="20px">
+    <app-weathercurrent></app-weathercurrent>
+    <app-calenderday></app-calenderday>
+  </div>
+  <div fxFlex>frontend works!</div>
+  <div fxLayout="column" fxFlex="25%" fxLayoutGap="20px">
+    <app-weatherpreview></app-weatherpreview>
+    <app-note></app-note>
+    <app-mails></app-mails>
+    <app-news></app-news>
+    <app-calendermonth></app-calendermonth>
+    <app-calenderweek></app-calenderweek>
+  </div>
+</div>

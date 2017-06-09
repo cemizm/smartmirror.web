@@ -1,12 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-weather',
-  templateUrl: './weather.component.html',
-  styleUrls: ['./weather.component.scss']
+  selector: 'app-weathercurrent',
+  templateUrl: './weathercurrent.component.html',
+  styleUrls: ['./weathercurrent.component.scss']
 })
 
-export class WeatherComponent implements OnInit {
+export class WeathercurrentComponent implements OnInit {
+  tiles = [
+    {text: 'DayDate', cols: 1, rows: 1, color: 'lightblue'},
+    {text: 'Temp', cols: 2, rows: 2, color: 'lightgreen'},
+    {text: 'Bild', cols: 1, rows: 1, color: 'lightpink'},
+  ];
   private test: string;
   private marginHigh: number;
   private marginWidth: number;
