@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-mails',
-  templateUrl: './mails.component.html',
-  styleUrls: ['./mails.component.scss']
+  selector: 'app-calender',
+  templateUrl: './calender.component.html',
+  styleUrls: ['./calender.component.scss']
 })
-export class MailsComponent implements OnInit {
+export class CalenderComponent implements OnInit {
 
   folders = [
     {
