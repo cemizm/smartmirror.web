@@ -1,14 +1,26 @@
 <md-card class="calenderday">
   <md-card-header>
-    <md-card-title>CalenderDay</md-card-title>
+    <md-card-title>News</md-card-title>
   </md-card-header>
-  <md-grid-list cols="1" >
-    <md-grid-tile
-      *ngFor="let tiles of tiles"
-      [colspan]="tiles.cols"
-      [rowspan]="tiles.rows"
-      [style.background]="tiles.color">
-      {{tiles.text}}
+  <md-grid-list cols="3" rowHeight="200px">
+    <md-grid-tile [style.background]="'lightgreen'">
+      <md-list>
+        <md-list-item>Item 1</md-list-item>
+        <md-list-item>Item 2</md-list-item>
+        <md-list-item>Item 3</md-list-item>
+      </md-list>
     </md-grid-tile>
+    <md-grid-tile [style.background]="'lightpink'">
+      <md-list>
+        <md-list-item>Item 1</md-list-item>
+        <md-list-item>Item 2</md-list-item>
+        <md-list-item>Item 3</md-list-item>
+      </md-list>
+    </md-grid-tile>
+    <md-grid-tile [style.background]="'lightblue'"><md-list>
+      <md-list-item>Item 1</md-list-item>
+      <md-list-item>Item 2</md-list-item>
+      <md-list-item>Item 3</md-list-item>
+    </md-list></md-grid-tile>
   </md-grid-list>
 </md-card>

@@ -18,12 +18,36 @@ export class WeatherpreviewComponent implements OnInit {
     {text: 'Bild', cols: 1, rows: 1, color: 'green'},
     {text: 'Bild', cols: 1, rows: 1, color: 'blue'},
     {text: 'Bild', cols: 1, rows: 1, color: 'red'},
-    {text: 'Zeiten', cols: 1, rows: 8, color: 'grey'},
-    {text: 'Temp', cols: 1, rows: 8, color: 'lightgrey'},
-    {text: 'Temp', cols: 1, rows: 8, color: 'lightgrey'},
-    {text: 'Temp', cols: 1, rows: 8, color: 'lightgrey'},
-    {text: 'Temp', cols: 1, rows: 8, color: 'lightgrey'},
-    {text: 'Temp', cols: 1, rows: 8, color: 'lightgrey'},
+  ];
+  tempTiles = [
+    {cols: 1, rows: 4, color: 'lightgrey'},
+    {cols: 1, rows: 4, color: 'lightgrey'},
+    {cols: 1, rows: 4, color: 'lightgrey'},
+    {cols: 1, rows: 4, color: 'lightgrey'},
+    {cols: 1, rows: 4, color: 'lightgrey'},
+  ];
+  timeTiles = [
+    {cols: 1, rows: 4, color: 'grey'},
+  ];
+  temp = [
+    {text1: '24°C',
+      text2: '25°C',
+      text3: '22°C',
+      text4: '26°C',
+      text5: '28°C',
+      text6: '29°C',
+      text7: '17°C',
+      text8: '16°C'},
+  ];
+  time = [
+    {text1: '00:00',
+      text2: '03:00',
+      text3: '06:00',
+      text4: '09:00',
+      text5: '12:00',
+      text6: '15:00',
+      text7: '18:00',
+      text8: '21:00'},
   ];
 
   constructor() { }

@@ -11,4 +11,44 @@
       {{tiles.text}}
     </md-grid-tile>
   </md-grid-list>
+  <md-grid-list cols="6" rowHeigt="10%">
+    <md-grid-tile
+      *ngFor="let timeTiles of timeTiles"
+      [colspan]="timeTiles.cols"
+      [rowspan]="timeTiles.rows"
+      [style.background]="timeTiles.color">
+      <md-list>
+        <md-list-item *ngFor="let time of time">
+          <h1 md-line></h1>
+          <p md-line>{{time.text1}}</p>
+          <p md-line>{{time.text2}}</p>
+          <p md-line>{{time.text3}}</p>
+          <p md-line>{{time.text4}}</p>
+          <p md-line>{{time.text5}}</p>
+          <p md-line>{{time.text6}}</p>
+          <p md-line>{{time.text7}}</p>
+          <p md-line>{{time.text8}}</p>
+        </md-list-item>
+      </md-list>
+    </md-grid-tile>
+    <md-grid-tile
+      *ngFor="let tempTiles of tempTiles"
+      [colspan]="tempTiles.cols"
+      [rowspan]="tempTiles.rows"
+      [style.background]="tempTiles.color">
+      <md-list>
+        <md-list-item *ngFor="let temp of temp">
+          <h1 md-line></h1>
+          <p md-line>{{temp.text1}}</p>
+          <p md-line>{{temp.text2}}</p>
+          <p md-line>{{temp.text3}}</p>
+          <p md-line>{{temp.text4}}</p>
+          <p md-line>{{temp.text5}}</p>
+          <p md-line>{{temp.text6}}</p>
+          <p md-line>{{temp.text7}}</p>
+          <p md-line>{{temp.text8}}</p>
+        </md-list-item>
+      </md-list>
+    </md-grid-tile>
+  </md-grid-list>
 </md-card>
