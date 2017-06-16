@@ -1,23 +1,7 @@
 <md-card class="calenderday">
-  <md-grid-list cols="3" rowHeight="200px">
-    <md-grid-tile [style.background]="'lightgreen'">
       <md-list>
-        <md-list-item>Item 1</md-list-item>
-        <md-list-item>Item 2</md-list-item>
-        <md-list-item>Item 3</md-list-item>
+        <md-list-item *ngFor="let news of news">
+          <h4 md-line>{{news.title}}</h4>
+        </md-list-item>
       </md-list>
-    </md-grid-tile>
-    <md-grid-tile [style.background]="'lightpink'">
-      <md-list>
-        <md-list-item>Item 1</md-list-item>
-        <md-list-item>Item 2</md-list-item>
-        <md-list-item>Item 3</md-list-item>
-      </md-list>
-    </md-grid-tile>
-    <md-grid-tile [style.background]="'lightblue'"><md-list>
-      <md-list-item>Item 1</md-list-item>
-      <md-list-item>Item 2</md-list-item>
-      <md-list-item>Item 3</md-list-item>
-    </md-list></md-grid-tile>
-  </md-grid-list>
 </md-card>

@@ -1,6 +1,5 @@
 <md-card class="mails">
   <md-list>
-    <md-divider></md-divider>
     <md-list-item *ngFor="let mail of mails">
       <h4 md-line>{{mail.betreff}}</h4>
       <p md-line>{{mail.date | date}} | {{mail.absender}}</p>
