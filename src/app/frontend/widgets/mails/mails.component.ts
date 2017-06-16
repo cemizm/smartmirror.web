@@ -7,21 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MailsComponent implements OnInit {
 
-  folders = [
+  mails = [
     {
-      absender: 'Photos',
+      absender: 'Absender1',
       date: new Date('1/1/16'),
       betreff: 'Ich bin ein Betreff',
     },
     {
-      absender: 'Recipes',
+      absender: 'Absender2',
       date: new Date('1/17/16'),
-      treff: 'Ich bin ein Betreff',
+      betreff: 'Ich bin auch ein Betreff',
     },
     {
-      absender: 'Work',
+      absender: 'Absender3',
       date: new Date('1/28/16'),
-      treff: 'Ich bin ein Betreff',
+      betreff: 'Ich bin der letzte Betreff',
     }
   ];
   constructor() { }
