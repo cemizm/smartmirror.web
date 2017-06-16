@@ -16,6 +16,11 @@ export class WeatherService {
     return WEATHER_LIST;
   }
 
+  getWeather() {
+    return this.http.request('./assets/weather.json')
+      .map(res => res.json());
+  }
+
   getWeatheritemsbyCity(cityName): Observable<any>{
 
     return this.http.get(this.baseUrl +'weather?q='+ cityName +'&appid='+ APPID +'&units=metric')

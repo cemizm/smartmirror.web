@@ -9,7 +9,7 @@ import {WeatherService} from "../weather.service";
 
 export class WeathercurrentComponent implements OnInit {
   tiles = [
-    {text: 'DayDate', cols: 1, rows: 1, color: 'lightblue'},
+    {text: 'Stadt', cols: 1, rows: 1, color: 'lightblue'},
     {text: 'Temp', cols: 2, rows: 2, color: 'lightgreen'},
     {text: 'Bild', cols: 1, rows: 1, color: 'lightpink'},
   ];
@@ -22,8 +22,10 @@ export class WeathercurrentComponent implements OnInit {
   weatherData: any[];
   errorMessage: string;
 
+
+
   getWeather() {
-    return this.weatherService.getWeatherForecast("Bielefeld");
+    return this.weatherService.getWeather();
   }
 
   constructor(private weatherService: WeatherService) {
@@ -35,6 +37,13 @@ export class WeathercurrentComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.getWeather().subscribe(data => {
+      this.tiles[0].text = data.city.name;
+      this.tiles[1].text = data.list[0].main.temp;
+      this.tiles[2].text = data.list[0].weather[0].main;
+    });
+
     this.weatherService.getWeatherForecast("Bielefeld")
       .subscribe(data => {this.weatherData = data},
         error =>  this.errorMessage = <any>error,
