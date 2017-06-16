@@ -9,26 +9,19 @@ export class MailsComponent implements OnInit {
 
   folders = [
     {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
+      absender: 'Photos',
+      date: new Date('1/1/16'),
+      betreff: 'Ich bin ein Betreff',
     },
     {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
+      absender: 'Recipes',
+      date: new Date('1/17/16'),
+      treff: 'Ich bin ein Betreff',
     },
     {
-      name: 'Work',
-      updated: new Date('1/28/16'),
-    }
-  ];
-  notes = [
-    {
-      name: 'Vacation Itinerary',
-      updated: new Date('2/20/16'),
-    },
-    {
-      name: 'Kitchen Remodel',
-      updated: new Date('1/18/16'),
+      absender: 'Work',
+      date: new Date('1/28/16'),
+      treff: 'Ich bin ein Betreff',
     }
   ];
   constructor() { }

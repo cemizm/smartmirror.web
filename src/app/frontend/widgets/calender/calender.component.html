@@ -3,16 +3,15 @@
     <md-card-title>Calender</md-card-title>
   </md-card-header>
   <md-list>
-    <h3 md-subheader>Folders</h3>
-    <md-list-item *ngFor="let folder of folders">
-      <h4 md-line>{{folder.name}}</h4>
-      <p md-line> {{folder.updated | date}} </p>
-    </md-list-item>
     <md-divider></md-divider>
-    <h3 md-subheader>Notes</h3>
-    <md-list-item *ngFor="let note of notes">
-      <h4 md-line>{{note.name}}</h4>
-      <p md-line> {{note.updated | date}} </p>
+    <h3 md-subheader>{{dates[0]}}</h3>
+      <md-list-item *ngFor="let termin of termineEins">
+        <h6 md-line> {{termin.absender}}</h6>
+      </md-list-item>
+    <md-divider></md-divider>
+    <h3 md-subheader>{{dates[1]}}</h3>
+    <md-list-item *ngFor="let termin of termineZwei">
+      <h6 md-line>{{termin.absender}}</h6>
     </md-list-item>
   </md-list>
 </md-card>
