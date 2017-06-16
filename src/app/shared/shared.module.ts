@@ -4,8 +4,7 @@ import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {
-  MdButtonModule, MdCheckboxModule, MdCardModule, MdGridListModule, MdListModule
+import { MdButtonModule, MdCheckboxModule, MdCardModule, MdGridListModule, MdListModule
 } from '@angular/material';
 
 @NgModule({

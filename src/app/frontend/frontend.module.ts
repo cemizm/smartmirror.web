@@ -17,9 +17,10 @@ export const ModuleRoutes: Routes = [
 @NgModule({
   imports: [
     SharedModule,
-    RouterModule.forChild(ModuleRoutes)
+    RouterModule.forChild(ModuleRoutes),
+    WeatherModule
   ],
-  declarations: [TestComponent, WeathercurrentComponent, NoteComponent, WeatherpreviewComponent, NewsComponent, CalenderComponent, MailsComponent]
+  declarations: [TestComponent, WeatherComponent, NotizComponent]
 })
 export class FrontendModule {
 }

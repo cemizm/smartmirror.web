@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {WeatherService} from "./weather.service";
 
 @Component({
   selector: 'app-weathercurrent',
@@ -18,7 +19,14 @@ export class WeathercurrentComponent implements OnInit {
   private marginTop: number;
   private marginLeft: number;
 
-  constructor() {
+  weatherData: any[];
+  errorMessage: string;
+
+  getWeather() {
+    return this.weatherService.getWeatherForecast("Bielefeld");
+  }
+
+  constructor(private weatherService: WeatherService) {
     this.test = "Hallo Welt!";
     this.marginHigh = 100;
     this.marginWidth = 50;
@@ -27,6 +35,10 @@ export class WeathercurrentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.weatherService.getWeatherForecast("Bielefeld")
+      .subscribe(data => {this.weatherData = data},
+        error =>  this.errorMessage = <any>error,
+      );
   }
 
 }
