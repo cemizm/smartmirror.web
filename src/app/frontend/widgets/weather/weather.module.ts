@@ -1,15 +1,16 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { SharedModule } from '../../../shared/shared.module';
 import { WeatherService } from "./weather.service";
-import { WeatherComponent} from "./weather.component";
+import { WeathercurrentComponent } from "./weathercurrent/weathercurrent.component";
+import { WeatherpreviewComponent } from "./weatherpreview/weatherpreview.component";
 
 
 @NgModule({
   imports: [
-    CommonModule
+    SharedModule
   ],
-  declarations: [ WeatherComponent],
+  declarations: [ WeathercurrentComponent, WeatherpreviewComponent],
   providers: [WeatherService],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  exports: [WeatherpreviewComponent, WeathercurrentComponent]
 })
 export class WeatherModule { }
