@@ -6,30 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calender.component.scss']
 })
 export class CalenderComponent implements OnInit {
-
-  folders = [
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
-    },
-    {
-      name: 'Work',
-      updated: new Date('1/28/16'),
-    }
+  dates: Array<string> = ['12.06.2017', '13.06.2017'];
+  termineEins = [
+    {name: 'Termin1'},
+    {name: 'Termin2'},
+    {name: 'Termin3'},
   ];
-  notes = [
-    {
-      name: 'Vacation Itinerary',
-      updated: new Date('2/20/16'),
-    },
-    {
-      name: 'Kitchen Remodel',
-      updated: new Date('1/18/16'),
-    }
+  termineZwei = [
+    {name: 'Termin1'},
+    {name: 'Termin2'},
   ];
   constructor() { }
 
