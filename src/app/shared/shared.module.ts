@@ -1,9 +1,10 @@
-import {NgModule} from "@angular/core";
+import {NgModule, ModuleWithProviders} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MdButtonModule, MdCheckboxModule, MdCardModule, MdGridListModule, MdListModule} from "@angular/material";
+import {DataCacheService} from "./services/data-cache.service";
 
 @NgModule({
   imports: [
@@ -31,4 +32,12 @@ import {MdButtonModule, MdCheckboxModule, MdCardModule, MdGridListModule, MdList
   declarations: []
 })
 export class SharedModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: SharedModule,
+      providers: [
+        DataCacheService
+      ]
+    };
+  }
 }

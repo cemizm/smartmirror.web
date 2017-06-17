@@ -21,10 +21,11 @@ export const AppRoutes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    SharedModule,
     RouterModule.forRoot(AppRoutes),
 
     SmartMirrorModule.forRoot({apiUrl: environment.api}),
+
+    SharedModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
