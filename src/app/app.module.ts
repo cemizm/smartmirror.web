@@ -5,6 +5,8 @@ import {BrowserModule} from "@angular/platform-browser";
 import {AppComponent} from './app.component';
 import {SharedModule} from "./shared/shared.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {environment} from "../environments/environment";
+import {SmartMirrorModule} from "@cemizm/smartmirror-shared";
 
 export const AppRoutes: Routes = [
   {path: 'frontend', loadChildren: './frontend/frontend.module#FrontendModule'},
@@ -21,6 +23,8 @@ export const AppRoutes: Routes = [
     BrowserAnimationsModule,
     SharedModule,
     RouterModule.forRoot(AppRoutes),
+
+    SmartMirrorModule.forRoot({apiUrl: environment.api}),
   ],
   providers: [],
   bootstrap: [AppComponent]
