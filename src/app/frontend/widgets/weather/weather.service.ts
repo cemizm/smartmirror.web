@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { WEATHER_LIST } from './weather.data';
 import {Observable} from "rxjs/Observable";
+import 'rxjs/add/observable/interval';
+
+import { WeatherCurrent } from "./weather";
 
 const APPID = '45f4dd45e0f724512ba044c5a2caf4bc';
 
@@ -9,16 +11,18 @@ const APPID = '45f4dd45e0f724512ba044c5a2caf4bc';
 export class WeatherService {
 
   private baseUrl='http://api.openweathermap.org/data/2.5/';
+  public weatherDataCurrent: WeatherCurrent;
+  errorMessage: string;
 
-  constructor(private http: Http) { }
-
-  getWeatherItems(){
-    return WEATHER_LIST;
+  constructor(private http: Http) { 
+    this.weatherDataCurrent = new WeatherCurrent("loading...", "", 0);
+    this.polledHttpGetRequest('./assets/weather-current.json', 2000).subscribe(data => 
+      this.weatherDataCurrent = new WeatherCurrent(data.name, "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png", data.main.temp));
   }
 
-  getWeather() {
-    return this.http.request('./assets/weather.json')
-      .map(res => res.json());
+  polledHttpGetRequest(url: string, interval: number): Observable<any>{
+            return Observable.interval(interval) 
+        .switchMap(() => this.http.get(url).map(res => res.json()));
   }
 
   getWeatheritemsbyCity(cityName): Observable<any>{
