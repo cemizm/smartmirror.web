@@ -1,34 +1,48 @@
 /**
  * Created by Meike on 16.06.2017.
  */
-export interface WeatherForecast{
+export interface WeatherForecast {
   city: City;
   weatherList: WeatherListItem[];
   cnt: number;
   message: number;
   cod: string;
 }
-export interface City{
+export interface WeatherCurrent {
+  coord: Coord;
+  weatherinformation: WeatherInformation;
+  base: string;
+  maininformation: MainInformationCurrent;
+  visibility: number;
+  windinformation: WindInformation;
+  cloudinformation: CloudInformation;
+  dt: number;
+  sysInformation: SysInformationCurrent;
+  id: number;
+  name: string;
+  cod: number;
+}
+export interface City {
   id: number;
   name: string;
   coord: Coord;
   country: string;
 }
-export interface Coord{
+export interface Coord {
   lat: number;
   lon: number;
 }
-export interface WeatherListItem{
+export interface WeatherListItem {
   dt: number;
-  maininformation: MainInformation;
+  maininformation: MainInformationForecast;
   weatherinformation: WeatherInformation;
   cloudinformation: CloudInformation;
   windinformation: WindInformation;
   raininformation: RainInformation;
-  sysinformation: SysInformation;
+  sysinformation: SysInformationForecast;
   dt_txt: string;
 }
-export interface MainInformation{
+export interface MainInformationForecast {
   temp: number;
   temp_min: number;
   temp_max: number;
@@ -38,22 +52,37 @@ export interface MainInformation{
   humidity: number;
   temp_kf: number;
 }
-export interface WeatherInformation{
+export interface MainInformationCurrent {
+  temp: number;
+  pressure: number;
+  humidity: number;
+  temp_min: number;
+  temp_max: number;
+}
+export interface WeatherInformation {
   weatherId: number;
   weatherMain: string;
   weatherDescription: string;
   icon: string;
 }
-export interface CloudInformation{
+export interface CloudInformation {
   all: number;
 }
-export interface WindInformation{
+export interface WindInformation {
   speed: number;
   deg: number;
 }
-export interface RainInformation{
+export interface RainInformation {
   null;
 }
-export interface SysInformation{
+export interface SysInformationForecast {
   pod: string;
+}
+export interface SysInformationCurrent {
+  type: number;
+  id: number;
+  message: number;
+  country: string;
+  sunrise: number;
+  sunset: number;
 }
