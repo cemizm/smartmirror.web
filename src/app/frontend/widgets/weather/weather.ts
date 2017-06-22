@@ -1,4 +1,4 @@
-export class Weather{
+export class WeatherCurrent{
   constructor(
     public city: string,
     public description: string,

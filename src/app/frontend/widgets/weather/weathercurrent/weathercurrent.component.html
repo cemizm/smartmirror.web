@@ -1,11 +1,21 @@
 <md-card class="weathercurrent">
   <md-grid-list cols="3" rowHeigt="10%">
-    <md-grid-tile
+    <!--md-grid-tile
       *ngFor="let tiles of tiles"
       [colspan]="tiles.cols"
       [rowspan]="tiles.rows"
       [style.background]="tiles.color">
       {{tiles.text}}
+      
+    </md-grid-tile-->
+    <md-grid-tile colspan=1 rowspan=1>
+      {{this.weatherService.weatherDataCurrent.city}}
+    </md-grid-tile>
+    <md-grid-tile colspan=2 rowspan=2>
+      {{this.weatherService.weatherDataCurrent.temperature}}
+    </md-grid-tile>
+    <md-grid-tile colspan=1 rowspan=1>
+      <img src={{this.weatherService.weatherDataCurrent.description}}>
     </md-grid-tile>
   </md-grid-list>
 </md-card>
