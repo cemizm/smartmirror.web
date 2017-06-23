@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {WeatherService} from "../weather.service";
+import {WeatherCurrent} from "../weather.models";
 
 @Component({
   selector: 'app-weathercurrent',
@@ -8,23 +9,17 @@ import {WeatherService} from "../weather.service";
 })
 
 export class WeathercurrentComponent implements OnInit {
-  /*
-  tiles = [
-    {text: 'Stadt', cols: 1, rows: 1, color: 'lightblue'},
-    {text: 'Temp', cols: 2, rows: 2, color: 'lightgreen'},
-    {text: 'Bild', cols: 1, rows: 1, color: 'lightpink'},
-  ];
-  */
+  private weatherCurrent: WeatherCurrent;
   private test: string;
   private marginHigh: number;
   private marginWidth: number;
   private marginTop: number;
   private marginLeft: number;
 
- ;
+
 
   constructor(private weatherService: WeatherService) {
-    
+
     this.test = "Hallo Welt!";
     this.marginHigh = 100;
     this.marginWidth = 50;
@@ -34,7 +29,7 @@ export class WeathercurrentComponent implements OnInit {
   }
 
   ngOnInit( ) {
-
+    this.weatherService.getCurrentSubject().subscribe(data => this.weatherCurrent = data);
   }
 
 }
