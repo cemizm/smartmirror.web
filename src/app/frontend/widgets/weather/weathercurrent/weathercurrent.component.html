@@ -8,14 +8,18 @@
       {{tiles.text}}
       
     </md-grid-tile-->
-    <md-grid-tile colspan=1 rowspan=1>
+    <md-grid-tile colspan=1 rowspan=1 style="font-size: 120%">
       {{this.weatherService.weatherDataCurrent.city}}
     </md-grid-tile>
-    <md-grid-tile colspan=2 rowspan=2>
-      {{this.weatherService.weatherDataCurrent.temperature}}
+    <md-grid-tile colspan=2 rowspan=2 style="font-size: 200%">
+      {{this.weatherService.weatherDataCurrent.temperature | number: '.0-0'}} °C
     </md-grid-tile>
     <md-grid-tile colspan=1 rowspan=1>
       <img src={{this.weatherService.weatherDataCurrent.description}}>
     </md-grid-tile>
+    <md-grid-tile colspan=3 rowspan=1 style="font-size: 80%; color:grey">
+      last update: {{this.weatherService.weatherDataCurrent.time | date:'dd.MM. HH:mm'}}
+    </md-grid-tile>
+
   </md-grid-list>
 </md-card>
