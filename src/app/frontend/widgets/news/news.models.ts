@@ -23,9 +23,9 @@ export interface FeedEntry {
   enclosure: Enclosure[];
   categories: Categories[];
 }
-export interface Enclosure{
-  enclosrue: string;
+export interface Enclosure {
+  enclosure: string;
 }
-export interface Categories{
-  categorie: string;
+export interface Categories {
+  categories: string;
 }
