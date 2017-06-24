@@ -36,10 +36,12 @@ export interface WeatherListItem {
   dt: number;
   maininformation: MainInformationForecast;
   weatherinformation: WeatherInformation;
+  /*
   cloudinformation: CloudInformation;
   windinformation: WindInformation;
   raininformation: RainInformation;
   sysinformation: SysInformationForecast;
+  */
   dt_txt: string;
 }
 export interface MainInformationForecast {
