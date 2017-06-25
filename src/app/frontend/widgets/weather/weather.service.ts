@@ -3,44 +3,71 @@ import { Http, Response } from '@angular/http';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/interval';
 
-import { WeatherCurrent, WeatherForecast, WeatherInformation, MainInformationCurrent } from "./weather.models";
+import {
+  WeatherCurrent, WeatherForecast, WeatherInformation, MainInformationCurrent,
+  WeatherListItem, MainInformationForecast, CloudInformation, WindInformation, RainInformation, SysInformationForecast,
+  City, Coord
+} from "./weather.models";
 import {Subject} from "rxjs/Subject";
-import {current} from "codelyzer/util/syntaxKind";
 
-const APPID = '45f4dd45e0f724512ba044c5a2caf4bc';
+const APPID = '70e703682e7eeff15a6ce5ee7635f37e';
+const CITY = 'bielefeld';
+const POLL_INTERVAL_MINUTES = 30;
+
 
 @Injectable()
 export class WeatherService {
 
   private baseUrl= 'http://api.openweathermap.org/data/2.5/';
+
+  private weatherCurrentUrl = this.baseUrl +'weather?q='+ CITY +'&appid='+ APPID +'&units=metric';
+  private weatherForecastUrl = this.baseUrl+'forecast?q='+ CITY +'&appid='+ APPID +'&units=metric';
+  private pollingIntervall = 1000 * 60 * POLL_INTERVAL_MINUTES;
+
   private weatherCurrent: WeatherCurrent;
+  private weatherForecast: WeatherForecast;
   private weatherCurrentSubject: Subject<WeatherCurrent>;
+  private weatherForecastSubject: Subject<WeatherForecast>;
   errorMessage: string;
 
   constructor(private http: Http) {
     this.weatherCurrentSubject = new Subject<WeatherCurrent>();
-    this.polledHttpGetRequest('./assets/weather-current.json', 2000).subscribe(data => {
+    this.weatherForecastSubject = new Subject<WeatherForecast>();
+
+    this.initialHttpGetRequest(this.weatherCurrentUrl).subscribe(data => {
         this.weatherCurrent = this.createWeatherCurrent(data);
         this.weatherCurrentSubject.next(this.weatherCurrent);
       }
     );
 
-    /*
-    this.polledHttpGetRequest('./assets/weather-current.json', 2000).subscribe(data =>
-      this.weatherDataForecast.push(
-        data.list.forEach(element => {
-          this.weatherDataForecast.push(this.createWeatherForecast(element));
-        })
-      )
+    this.initialHttpGetRequest(this.weatherForecastUrl).subscribe(data => {
+        this.weatherForecast = this.createWeatherForecast(data);
+        this.weatherForecastSubject.next(this.weatherForecast);
+      }
     );
-    */
+
+    this.polledHttpGetRequest(this.weatherCurrentUrl, this.pollingIntervall).subscribe(data => {
+        this.weatherCurrent = this.createWeatherCurrent(data);
+        this.weatherCurrentSubject.next(this.weatherCurrent);
+      }
+    );
+
+    this.polledHttpGetRequest(this.weatherForecastUrl, this.pollingIntervall).subscribe(data => {
+        this.weatherForecast = this.createWeatherForecast(data);
+        this.weatherForecastSubject.next(this.weatherForecast);
+      }
+    );
   }
 
-  getCurrentSubject(): Observable<WeatherCurrent> {
+  getWeatherCurrentSubject(): Observable<WeatherCurrent> {
     return this.weatherCurrentSubject;
   }
 
-  createWeatherCurrent(data: any): WeatherCurrent {
+  getWeatherForecastSubject(): Observable<WeatherForecast> {
+    return this.weatherForecastSubject;
+  }
+
+  createWeatherCurrent(data: any) {
     const weatherInformation: WeatherInformation = {
       weatherId: 0,
       weatherMain: "",
@@ -72,38 +99,80 @@ export class WeatherService {
     };
     return wc;
   }
-  /*
-  createWeatherForecast(data: any): WeatherForecast {
-    return new WeatherForecast(
-              "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png",
-              data.main.temp,
-              data.dt
-    );
+
+  createWeatherForecast(data: any) {
+    let weatherList: Array<WeatherListItem> = [];
+    let counter = 0;
+
+    data.list.forEach(element => {
+      if (counter > 5) {
+        return;
+      }
+      const mainInformationForecast: MainInformationForecast = {
+        temp: element.main.temp,
+        temp_min: 0,
+        temp_max: 0,
+        pressure: 0,
+        sea_level: 0,
+        grnd_level: 0,
+        humidity: 0,
+        temp_kf: 0
+      };
+
+      const weatherInformation: WeatherInformation = {
+        weatherId: 0,
+        weatherMain: "",
+        weatherDescription: "",
+        icon: "http://openweathermap.org/img/w/"  + element.weather[0].icon + ".png"
+      };
+
+      const weatherListItem: WeatherListItem = {
+        dt: element.dt * 1000,
+        maininformation: mainInformationForecast,
+        weatherinformation: weatherInformation,
+        /*
+         cloudinformation: cloudInformation,
+         windinformation: windInformation,
+         raininformation: rainInformation,
+         sysinformation: sysInformationForecast,
+         */
+        dt_txt: ""
+      };
+      weatherList.push(weatherListItem);
+      counter++;
+    });
+
+    const coord: Coord = {
+      lat: 0,
+      lon: 0
+    };
+
+    const city: City = {
+      id: 0,
+      name: "",
+      coord: coord,
+      country: ""
+    };
+
+    const wf: WeatherForecast = {
+      city: city,
+      weatherList: weatherList,
+      cnt: 0,
+      message: 0,
+      cod: ""
+    };
+    return wf;
   }
-  */
 
   polledHttpGetRequest(url: string, interval: number): Observable<any>{
             return Observable.interval(interval)
         .switchMap(() => this.http.get(url).map(res => res.json()));
   }
 
-  getWeatheritemsbyCity(cityName): Observable<any>{
-
-    return this.http.get(this.baseUrl +'weather?q='+ cityName +'&appid='+ APPID +'&units=metric')
+  initialHttpGetRequest(url: string): Observable<any>{
+    return this.http.get(url)
       .map(response => response.json())
       .catch(this.handleError);
-  }
-
-  getWeatherForecast(cityName): Observable<any[]>{
-
-    return this.http.get(this.baseUrl+'forecast?q='+ cityName +'&appid='+ APPID +'&units=metric')
-      .map(response => this.extractData(response))
-      .catch(this.handleError);
-  }
-
-  private extractData(res: any) {
-    const body = res.json();
-    return body.list || { };
   }
 
   private handleError (error: any) {

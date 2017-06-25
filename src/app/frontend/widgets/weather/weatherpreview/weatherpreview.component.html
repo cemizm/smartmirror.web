@@ -1,5 +1,6 @@
 <md-card class="weatherpreview">
-  <md-grid-list cols="6" rowHeigt="10%">
+  Hier kommt noch ein schickes Chartplugin mit rein
+  <!--md-grid-list cols="6" rowHeigt="10%">
     <md-grid-tile
       *ngFor="let tiles of tiles"
       [colspan]="tiles.cols"
@@ -47,5 +48,15 @@
         </md-list-item>
       </md-list>
     </md-grid-tile>
-  </md-grid-list>
+  </md-grid-list-->
+
+  <md-list *ngIf="weatherForecast">
+    <md-list-item *ngFor="let weatherItem of weatherForecast.weatherList">
+      <img src={{weatherItem.weatherinformation.icon}}>
+      <div style="font-size: 120%">{{weatherItem.maininformation.temp | number: '.0-0'}} °C  </div>
+      <div style="font-size: 70%;color: grey">{{weatherItem.dt | date:'dd.MM. HH:mm'}}</div>
+
+    </md-list-item>
+  </md-list>
+
 </md-card>

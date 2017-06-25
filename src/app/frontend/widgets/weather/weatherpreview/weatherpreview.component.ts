@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {WeatherForecast} from "../weather.models";
+import {WeatherService} from "../weather.service";
 
 @Component({
   selector: 'app-weatherpreview',
@@ -6,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./weatherpreview.component.scss']
 })
 export class WeatherpreviewComponent implements OnInit {
+  private weatherForecast: WeatherForecast;
   tiles = [
     {text: 'One', cols: 1, rows: 2, color: 'lightblue'},
     {text: 'DayDate', cols: 1, rows: 1, color: 'lightgreen'},
@@ -50,9 +53,10 @@ export class WeatherpreviewComponent implements OnInit {
       text8: '21:00'},
   ];
 
-  constructor() { }
+  constructor(private weatherService: WeatherService) { }
 
   ngOnInit() {
+    this.weatherService.getWeatherForecastSubject().subscribe(data => this.weatherForecast = data);
   }
 
 }
