@@ -20,8 +20,8 @@ export class WeatherService {
 
   private baseUrl= 'http://api.openweathermap.org/data/2.5/';
 
-  private weatherCurrentUrl = this.baseUrl +'weather?q='+ CITY +'&appid='+ APPID +'&units=metric';
-  private weatherForecastUrl = this.baseUrl+'forecast?q='+ CITY +'&appid='+ APPID +'&units=metric';
+  private weatherCurrentUrl = this.baseUrl + 'weather?q=' + CITY + '&appid=' + APPID + '&units=metric';
+  private weatherForecastUrl = this.baseUrl + 'forecast?q=' + CITY + '&appid=' + APPID + '&units=metric';
   private pollingIntervall = 1000 * 60 * POLL_INTERVAL_MINUTES;
 
   private weatherCurrent: WeatherCurrent;
