@@ -16,9 +16,7 @@ export class NewsViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.newsService.getFeedContent("http://www.tagesschau.de/xml/rss2").subscribe(feed => {
-      this.feed = feed;
-    });
+    this.newsService.getFeedContent("http://www.tagesschau.de/xml/rss2").subscribe(feed => this.feed = feed);
   }
 
 }
