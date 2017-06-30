@@ -52,9 +52,10 @@
 
   <md-list *ngIf="weatherForecast">
     <md-list-item *ngFor="let weatherItem of weatherForecast.weatherList">
-      <img src={{weatherItem.weatherinformation.icon}}>
+      <i class={{weatherItem.weatherinformation.weatherId}} style="font-size: 200%"></i>
       <div style="font-size: 120%">{{weatherItem.maininformation.temp | number: '.0-0'}} °C  </div>
       <div style="font-size: 70%;color: grey">{{weatherItem.dt | date:'dd.MM. HH:mm'}}</div>
+
 
     </md-list-item>
   </md-list>
