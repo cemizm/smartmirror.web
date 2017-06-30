@@ -1,15 +1,8 @@
 <md-card class="news">
-  <md-list *ngIf="feed && feed.feedInfo">
-    <md-list-item>Test</md-list-item>
-    <!-- <md-list-item *ngFor="let feeds of feed"> -->
-    <md-list-item>
-      <h4 md-line>{{feed.status}}</h4>
-    </md-list-item>
-    <md-list-item>
-      <h4 md-line>Titel: {{feed.feedInfo.url}}</h4>
-    </md-list-item>
-     <md-list-item *ngFor="let feeds of feed.feedEntry">
-      <h4 md-line>{{feeds.title}}</h4>
-    </md-list-item>
-  </md-list>
+  <h5 md-line>{{feedRss.feed.title}}</h5>
+  <div fxLayout="column" fxLayoutAlign="stretch stretch" *ngFor="let items of feedRss.items">
+    <p class="title">{{items.title}}</p>
+    <!--p class="date"> {{items.pubDate | date:'dd.MM.yyyy'}}</p>
+    <p class="desc"> {{items.description}} </p-->
+  </div>
 </md-card>
