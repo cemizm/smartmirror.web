@@ -1,14 +1,14 @@
 <md-card class="weathercurrent">
   <md-grid-list cols="3" rowHeigt="10%" *ngIf="weatherCurrent">
 
-    <md-grid-tile colspan=1 rowspan=1 style="font-size: 120%">
+    <md-grid-tile colspan=3 rowspan=1 style="font-size: 200%">
       {{weatherCurrent.name}}
     </md-grid-tile>
-    <md-grid-tile colspan=2 rowspan=2 style="font-size: 200%">
-      {{weatherCurrent.maininformation.temp | number: '.0-0'}} °C
-    </md-grid-tile>
     <md-grid-tile colspan=1 rowspan=1>
-      <img src={{weatherCurrent.weatherinformation.icon}}>
+      <i class={{weatherCurrent.weatherinformation.weatherId}} style="font-size: 300%"></i>
+    </md-grid-tile>
+    <md-grid-tile colspan=2 rowspan=1 style="font-size: 200%">
+      {{weatherCurrent.maininformation.temp | number: '.0-0'}} °C
     </md-grid-tile>
     <md-grid-tile colspan=3 rowspan=1 style="font-size: 80%; color:grey">
       last update: {{weatherCurrent.dt | date:'dd.MM. HH:mm'}}

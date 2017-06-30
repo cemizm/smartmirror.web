@@ -6,7 +6,7 @@ export interface WeatherForecast {
   weatherList: WeatherListItem[];
   cnt: number;
   message: number;
-  cod: string;
+  cod: number;
 }
 export interface WeatherCurrent {
   coord: Coord;
@@ -62,7 +62,7 @@ export interface MainInformationCurrent {
   temp_max: number;
 }
 export interface WeatherInformation {
-  weatherId: number;
+  weatherId: string;
   weatherMain: string;
   weatherDescription: string;
   icon: string;

@@ -69,7 +69,7 @@ export class WeatherService {
 
   createWeatherCurrent(data: any) {
     const weatherInformation: WeatherInformation = {
-      weatherId: 0,
+      weatherId: "owf owf-" + data.weather[0].id,
       weatherMain: "",
       weatherDescription: "",
       icon: "http://openweathermap.org/img/w/"  + data.weather[0].icon + ".png"
@@ -120,7 +120,7 @@ export class WeatherService {
       };
 
       const weatherInformation: WeatherInformation = {
-        weatherId: 0,
+        weatherId: "owf owf-" + element.weather[0].id,
         weatherMain: "",
         weatherDescription: "",
         icon: "http://openweathermap.org/img/w/"  + element.weather[0].icon + ".png"
@@ -159,7 +159,7 @@ export class WeatherService {
       weatherList: weatherList,
       cnt: 0,
       message: 0,
-      cod: ""
+      cod: 0
     };
     return wf;
   }

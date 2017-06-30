@@ -12,6 +12,7 @@
 $dark-primary: mat-palette($mat-indigo);
 $dark-accent:  mat-palette($mat-pink, A200, A100, A400);
 
+
 // The warn palette is optional (defaults to red).
 $dark-warn:    mat-palette($mat-red);
 
@@ -32,8 +33,8 @@ $smartmirror-dark-theme-background: (
 
 $smartmirror-dark-theme-foreground: (
   base:              white,
-  divider:           $white-12-opacity,
-  dividers:          $white-12-opacity,
+  divider:           $white-87-opacity,
+  dividers:          $white-87-opacity,
   disabled:          rgba(white, 0.3),
   disabled-button:   rgba(white, 0.3),
   disabled-text:     rgba(white, 0.3),
@@ -52,8 +53,8 @@ $smartmirror-dark-theme-foreground: (
     accent: $accent,
     warn: $warn,
     is-dark: true,
-    foreground: $smartmirror-dark-theme-foreground,
-    background: $smartmirror-dark-theme-background,
+    foreground: $mat-dark-theme-foreground,
+    background: $mat-dark-theme-background,
   );
 }
 
@@ -65,8 +66,3 @@ $smartmirror-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($smartmirror-theme);
-
-
-.mat-card {
-  box-shadow: 0 3px 1px -2px rgba(255,255,255,.2), 0 2px 2px 0 rgba(255,255,255,.14), 0 1px 5px 0 rgba(255,255,255,.12);
-}
