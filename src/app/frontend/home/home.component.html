@@ -4,7 +4,16 @@
     <app-calendar-view></app-calendar-view>
     <app-news-view></app-news-view>
   </div>
-  <div fxFlex></div>
+  <div fxFlex fxLayout="row" fxLayoutAlign="center center">
+    <div *ngIf="ticket">
+      <md-card>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data={{ticket?.number}}">
+        <md-card-content fxLayoutAlign="center center" style="font-size: 250%; margin: 40px">
+          {{ticket?.number}}
+        </md-card-content>
+      </md-card>
+    </div>
+  </div>
   <div fxLayout="column" fxFlex="25%" fxLayoutGap="20px">
     <app-weatherpreview></app-weatherpreview>
     <app-note></app-note>
