@@ -1,0 +1,17 @@
+.news {
+  .title{
+    margin-top: 10px;
+    //font-weight: bold;
+  }
+  .date{
+    font-size: 12px;
+  }
+  .desc{
+    text-overflow: ellipsis;
+    max-height: 40px;
+    overflow: hidden;
+  }
+  p {
+    margin: 2px;
+  }
+}
