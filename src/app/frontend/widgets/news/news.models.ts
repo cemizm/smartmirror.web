@@ -1,9 +1,9 @@
-export interface Feed {
+export interface FeedRSS {
   status: string;
-  feedInfo: FeedInfo;
-  feedEntry: FeedEntry[];
+  feed: Feed;
+  items: Items[];
 }
-export interface FeedInfo {
+export interface Feed {
   url: string;
   title: string;
   link: string;
@@ -11,9 +11,9 @@ export interface FeedInfo {
   description: string;
   image: string;
 }
-export interface FeedEntry {
+export interface Items {
   title: string;
-  pubDate: string;
+  pubDate: Date;
   link: string;
   guid: string;
   author: string;
