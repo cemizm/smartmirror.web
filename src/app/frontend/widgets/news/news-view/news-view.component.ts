@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NewsService} from "../news.service";
-import {Feed} from "../news.models";
+import {FeedRSS} from "../news.models";
 
 @Component({
   selector: 'app-news-view',
@@ -9,15 +9,15 @@ import {Feed} from "../news.models";
 })
 export class NewsViewComponent implements OnInit {
 
-  private feed: Feed;
+  private feedRss: FeedRSS;
 
   constructor(private newsService: NewsService) {
 
   }
-
   ngOnInit() {
-    this.newsService.getFeedContent("http://www.tagesschau.de/xml/rss2").subscribe(feed => {
-      this.feed = feed;
+    this.newsService.getFeedContent("http://www.tagesschau.de/xml/rss2").subscribe(data => {
+      this.feedRss = data;
+      console.log(this.feedRss);
     });
   }
 

@@ -1,15 +1,12 @@
 <md-card class="news">
-  <md-list *ngIf="feed && feed.feedInfo">
-    <md-list-item>Test</md-list-item>
-    <!-- <md-list-item *ngFor="let feeds of feed"> -->
-    <md-list-item>
-      <h4 md-line>{{feed.status}}</h4>
-    </md-list-item>
-    <md-list-item>
-      <h4 md-line>Titel: {{feed.feedInfo.url}}</h4>
-    </md-list-item>
-     <md-list-item *ngFor="let feeds of feed.feedEntry">
-      <h4 md-line>{{feeds.title}}</h4>
-    </md-list-item>
-  </md-list>
+  <h5 md-line>{{feedRss.feed.title}}</h5>
+  <md-grid-list cols="1" rowHeigt="16:9" *ngIf="feedRss">
+    <md-grid-tile *ngFor="let items of feedRss.items">
+      <ul>
+        <b>{{items.title}}</b> <br>
+        <FONT SIZE="2"> {{items.pubDate | date:'dd.MM.yyyy'}}</FONT> <br>
+        <!--FONT SIZE="2"> {{items.description}} </FONT-->
+      </ul>
+    </md-grid-tile>
+  </md-grid-list>
 </md-card>
