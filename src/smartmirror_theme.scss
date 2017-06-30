@@ -18,9 +18,9 @@ $dark-warn:    mat-palette($mat-red);
 $smartmirror-dark-theme-background: (
   status-bar: black,
   app-bar:    map_get($mat-grey, 900),
-  background: rgba(white, 1.00),
+  background: rgba(black, 1.00),
   hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
-  card:       rgba(white, 1.00),
+  card:       rgba(black, 1.00),
   dialog:     map_get($mat-grey, 800),
   disabled-button: $white-12-opacity,
   raised-button: map-get($mat-grey, 800),
