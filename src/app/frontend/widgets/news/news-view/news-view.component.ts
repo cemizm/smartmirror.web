@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, DoCheck} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {NewsService} from "../news.service";
 import {FeedRSS} from "../news.models";
 
