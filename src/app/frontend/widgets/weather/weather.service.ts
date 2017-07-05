@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http } from '@angular/http';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/interval';
 
@@ -164,12 +164,12 @@ export class WeatherService {
     return wf;
   }
 
-  polledHttpGetRequest(url: string, interval: number): Observable<any>{
+  polledHttpGetRequest(url: string, interval: number): Observable<any> {
             return Observable.interval(interval)
         .switchMap(() => this.http.get(url).map(res => res.json()));
   }
 
-  initialHttpGetRequest(url: string): Observable<any>{
+  initialHttpGetRequest(url: string): Observable<any> {
     return this.http.get(url)
       .map(response => response.json())
       .catch(this.handleError);

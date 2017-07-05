@@ -1,9 +1,8 @@
 <div fxLayout="row" fxLayoutAlign="stretch stretch">
-  <div fxLayout="column" fxFlex="25%" fxLayoutGap="20px">
-    <app-today></app-today>
-    <app-weathercurrent></app-weathercurrent>
-    <app-calendar-view></app-calendar-view>
-    <app-news-view></app-news-view>
+  <div fxLayout="column" fxFlex="25%" fxLayoutGap="20px" *ngIf="mirror">
+    <div *ngFor="let widget of mirror | mirrorPipe:1">
+      <ng-container [ngComponentOutlet]="load(widget)"></ng-container>
+    </div>
   </div>
   <div fxFlex fxLayout="row" fxLayoutAlign="center center">
     <div *ngIf="ticket">
@@ -15,9 +14,9 @@
       </md-card>
     </div>
   </div>
-  <div fxLayout="column" fxFlex="25%" fxLayoutGap="20px">
-    <app-weatherpreview></app-weatherpreview>
-    <app-note></app-note>
-    <app-mails></app-mails>
+  <div fxLayout="column" fxFlex="25%" fxLayoutGap="20px" *ngIf="mirror">
+    <div *ngFor="let widgetR of mirror | mirrorPipe:2">
+      <ng-container [ngComponentOutlet]="load(widgetR)"></ng-container>
+    </div>
   </div>
 </div>

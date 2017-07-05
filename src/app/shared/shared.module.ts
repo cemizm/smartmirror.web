@@ -6,6 +6,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {MdButtonModule, MdCardModule, MdCheckboxModule, MdGridListModule, MdListModule} from "@angular/material";
 import {DataCacheService} from "./services/data-cache.service";
 import {MirrorSettingService} from "./services/mirror-setting.service";
+import { MirrorPipe } from './utils/mirror.pipe';
 
 @NgModule({
   imports: [
@@ -28,9 +29,10 @@ import {MirrorSettingService} from "./services/mirror-setting.service";
     MdCheckboxModule,
     MdCardModule,
     MdGridListModule,
-    MdListModule
+    MdListModule,
+    MirrorPipe
   ],
-  declarations: []
+  declarations: [MirrorPipe]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
