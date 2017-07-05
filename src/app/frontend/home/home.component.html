@@ -3,7 +3,7 @@
     <app-today></app-today>
     <app-weathercurrent></app-weathercurrent>
     <app-calendar-view></app-calendar-view>
-    <app-news-view></app-news-view>
+    <app-news-view [settings]="{FeedUrl:'http://www.tagesschau.de/xml/rss2'}"></app-news-view>
   </div>
   <div fxFlex fxLayout="row" fxLayoutAlign="center center">
     <div *ngIf="ticket">
