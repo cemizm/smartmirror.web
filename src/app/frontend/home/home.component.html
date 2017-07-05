@@ -1,5 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="stretch stretch">
   <div fxLayout="column" fxFlex="25%" fxLayoutGap="20px" *ngIf="mirror">
+    <app-today></app-today>
     <div *ngFor="let widget of mirror | mirrorPipe:1">
       <ng-container [ngComponentOutlet]="load(widget)"></ng-container>
     </div>
