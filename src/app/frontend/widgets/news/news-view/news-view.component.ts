@@ -19,8 +19,7 @@ export class NewsViewComponent implements OnInit {
     this.MaxCount = 5;
   }
   ngOnInit() {
-     console.log(this.settings);
-    this.getpolledFeed();
+    this.getFeed();
   }
   getFeed() {
     this.newsService.getFeedContent(this.FeedUrl).subscribe(data => {
