@@ -22,7 +22,7 @@ export class NewsViewComponent implements OnInit {
   getFeed() {
     this.newsService.getFeedContent(this.settings.FeedUrl).subscribe(data => {
       this.feedRss = data;
-      this.feedRss.items.splice(5);
+      this.feedRss.items.splice(this.settings.MaxCount);
     });
   }
 }
