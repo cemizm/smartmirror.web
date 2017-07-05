@@ -20,12 +20,18 @@ export class NewsViewComponent implements OnInit {
   }
   ngOnInit() {
      console.log(this.settings);
-    this.getFeed();
+    this.getpolledFeed();
   }
   getFeed() {
     this.newsService.getFeedContent(this.FeedUrl).subscribe(data => {
       this.feedRss = data;
       this.feedRss.items.splice(this.MaxCount);
+    });
+  }
+  getpolledFeed() {
+    this.newsService.polledHttpGetRequest(this.settings.FeedUrl).subscribe(data => {
+      this.feedRss = data;
+      this.feedRss.items.splice(this.settings.MaxCount);
     });
   }
 }
