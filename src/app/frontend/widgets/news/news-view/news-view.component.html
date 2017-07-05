@@ -1,8 +1,10 @@
 <md-card class="news">
-  <h5 md-line>{{feedRss.feed.title}}</h5>
-  <div fxLayout="column" fxLayoutAlign="stretch stretch" *ngFor="let items of feedRss.items">
-    <p class="title">{{items.title}}</p>
-    <!--p class="date"> {{items.pubDate | date:'dd.MM.yyyy'}}</p>
-    <p class="desc"> {{items.description}} </p-->
+  <div *ngIf="feedRss">
+    <h5 md-line>{{feedRss.feed.title}}</h5>
+    <div fxLayout="column" fxLayoutAlign="stretch stretch" *ngFor="let items of feedRss.items">
+      <p class="title">{{items.title}}</p>
+      <!--p class="date"> {{items.pubDate | date:'dd.MM.yyyy'}}</p>
+      <p class="desc"> {{items.description}} </p-->
+    </div>
   </div>
 </md-card>

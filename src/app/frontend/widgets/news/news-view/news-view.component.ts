@@ -10,19 +10,22 @@ import {FeedRSS} from "../news.models";
 export class NewsViewComponent implements OnInit {
 
   private feedRss: FeedRSS;
+  private FeedUrl: string;
+  private MaxCount: number;
   @Input() settings: any;
 
   constructor(private newsService: NewsService) {
-
+    this.FeedUrl = "http://www.tageschau.de/xml/rss2";
+    this.MaxCount = 5;
   }
   ngOnInit() {
      console.log(this.settings);
     this.getFeed();
   }
   getFeed() {
-    this.newsService.getFeedContent(this.settings.FeedUrl).subscribe(data => {
+    this.newsService.getFeedContent(this.FeedUrl).subscribe(data => {
       this.feedRss = data;
-      this.feedRss.items.splice(this.settings.MaxCount);
+      this.feedRss.items.splice(this.MaxCount);
     });
   }
 }
