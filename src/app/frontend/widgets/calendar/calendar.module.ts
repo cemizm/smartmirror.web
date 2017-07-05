@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {Input, NgModule, OnInit} from "@angular/core";
 import {SharedModule} from "../../../shared/shared.module";
 import {CalendarViewComponent} from "./calendar-view/calendar-view.component";
 
@@ -9,5 +9,10 @@ import {CalendarViewComponent} from "./calendar-view/calendar-view.component";
   exports: [CalendarViewComponent],
   declarations: [CalendarViewComponent]
 })
-export class CalendarModule {
+export class CalendarModule implements OnInit {
+  @Input() settings: any;
+  constructor() {
+  }
+  ngOnInit() {
+  }
 }
