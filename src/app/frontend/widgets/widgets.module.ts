@@ -5,7 +5,8 @@ import {WeatherModule} from "./weather/weather.module";
 import {MailsComponent} from "./mails/mails.component";
 import {NoteComponent} from "./note/note.component";
 import {NewsModule} from "./news/news.module";
-import { TodayComponent } from './today/today.component';
+import {TodayComponent} from "./today/today.component";
+import {WidgetContainerComponent} from "./widget-container.component";
 
 @NgModule({
   imports: [
@@ -20,12 +21,14 @@ import { TodayComponent } from './today/today.component';
     NewsModule,
     MailsComponent,
     NoteComponent,
-    TodayComponent
+    TodayComponent,
+    WidgetContainerComponent
   ],
   declarations: [
     MailsComponent,
     NoteComponent,
-    TodayComponent
+    TodayComponent,
+    WidgetContainerComponent
   ]
 })
 export class WidgetsModule {
