@@ -10,7 +10,7 @@ import {WeatherSetting} from "@cemizm/smartmirror-shared";
 })
 export class WeatherpreviewComponent implements OnInit {
   private weatherForecast: WeatherForecast;
-  @Input() setting: WeatherSetting;
+  @Input() setting: WeatherSetting | WeatherSetting;
 
   tiles = [
     {text: 'One', cols: 1, rows: 2, color: 'lightblue'},

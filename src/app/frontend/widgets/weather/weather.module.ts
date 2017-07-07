@@ -12,6 +12,6 @@ import { WeatherViewComponent } from './weather-view/weather-view.component';
   ],
   declarations: [ WeathercurrentComponent, WeatherpreviewComponent, WeatherViewComponent],
   providers: [WeatherService],
-  exports: [WeatherpreviewComponent, WeathercurrentComponent]
+  exports: [WeatherpreviewComponent, WeathercurrentComponent, WeatherViewComponent]
 })
 export class WeatherModule { }

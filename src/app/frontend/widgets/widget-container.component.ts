@@ -12,5 +12,5 @@ import {Widget} from "@cemizm/smartmirror-shared";
   `
 })
 export class WidgetContainerComponent {
-  @Input() widget: Widget;
+  @Input() widget: Widget | Widget;
 }

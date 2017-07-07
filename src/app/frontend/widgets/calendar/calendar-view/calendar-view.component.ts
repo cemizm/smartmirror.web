@@ -8,7 +8,7 @@ import {CalendarSettings} from "@cemizm/smartmirror-shared";
 })
 export class CalendarViewComponent implements OnInit {
 
-  @Input() setting: CalendarSettings;
+  @Input() setting: CalendarSettings | CalendarSettings;
   dates: Array<string> = ['12.06.2017', '13.06.2017'];
   termineEins = [
     {name: 'Termin1'},

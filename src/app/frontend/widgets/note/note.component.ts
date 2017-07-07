@@ -7,7 +7,7 @@ import {TaskSetting} from "@cemizm/smartmirror-shared";
   styleUrls: ['./note.component.scss']
 })
 export class NoteComponent implements OnInit {
-  @Input() setting: TaskSetting;
+  @Input() setting: TaskSetting | TaskSetting;
   constructor() { }
 
   ngOnInit() {

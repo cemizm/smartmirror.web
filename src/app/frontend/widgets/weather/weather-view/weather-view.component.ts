@@ -11,7 +11,7 @@ import {WeatherSetting} from "@cemizm/smartmirror-shared";
 export class WeatherViewComponent implements OnInit {
   private weatherForecast: WeatherForecast;
   private weatherCurrent: WeatherCurrent;
-  @Input() setting: WeatherSetting;
+  @Input() setting: WeatherSetting | WeatherSetting;
 
   constructor(private weatherService: WeatherService) { }
 

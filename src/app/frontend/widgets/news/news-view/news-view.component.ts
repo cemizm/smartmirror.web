@@ -13,7 +13,7 @@ export class NewsViewComponent implements OnInit {
   private feedRss: FeedRSS;
   private feedUrl: string;
   private maxCount: number;
-  @Input() setting: NewsSetting;
+  @Input() setting: NewsSetting | NewsSetting;
 
   constructor(private newsService: NewsService) {
 

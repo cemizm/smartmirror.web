@@ -8,7 +8,7 @@ import {MailSettings} from "@cemizm/smartmirror-shared";
 })
 export class MailsComponent implements OnInit {
 
-  @Input() setting: MailSettings;
+  @Input() setting: MailSettings | MailSettings;
   mails = [
     {
       absender: 'Absender1',
