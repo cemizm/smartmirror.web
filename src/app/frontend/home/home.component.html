@@ -2,7 +2,7 @@
   <div fxLayout="column" fxFlex="25%" fxLayoutGap="20px" *ngIf="mirror">
     <app-today></app-today>
     <div *ngFor="let widget of mirror | mirrorPipe:1">
-      <ng-container [ngComponentOutlet]="load(widget)"></ng-container>
+      <app-widget-container [widget]="widget"></app-widget-container>
     </div>
   </div>
   <div fxFlex fxLayout="row" fxLayoutAlign="center center">
@@ -16,8 +16,8 @@
     </div>
   </div>
   <div fxLayout="column" fxFlex="25%" fxLayoutGap="20px" *ngIf="mirror">
-    <div *ngFor="let widgetR of mirror | mirrorPipe:2">
-      <ng-container [ngComponentOutlet]="load(widgetR)"></ng-container>
+    <div *ngFor="let widget of mirror | mirrorPipe:2">
+      <app-widget-container [widget]="widget"></app-widget-container>
     </div>
   </div>
 </div>
