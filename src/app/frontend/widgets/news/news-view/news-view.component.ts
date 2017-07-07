@@ -12,14 +12,14 @@ export class NewsViewComponent implements OnInit {
   private feedRss: FeedRSS;
   private FeedUrl: string;
   private MaxCount: number;
-  @Input() settings: any;
+  @Input() setting: any;
 
   constructor(private newsService: NewsService) {
-    this.FeedUrl = "http://www.tageschau.de/xml/rss2";
-    this.MaxCount = 5;
+    this.feedUrl = "http://www.tageschau.de/xml/rss2";
+    this.maxCount = 5;
   }
   ngOnInit() {
-    this.getFeed();
+    this.getpolledFeed();
   }
   getFeed() {
     this.newsService.getFeedContent(this.FeedUrl).subscribe(data => {
@@ -28,9 +28,9 @@ export class NewsViewComponent implements OnInit {
     });
   }
   getpolledFeed() {
-    this.newsService.polledHttpGetRequest(this.settings.FeedUrl).subscribe(data => {
+    this.newsService.polledHttpGetRequest(this.setting.feedUrl).subscribe(data => {
       this.feedRss = data;
-      this.feedRss.items.splice(this.settings.MaxCount);
+      this.feedRss.items.splice(this.setting.maxCount);
     });
   }
 }
