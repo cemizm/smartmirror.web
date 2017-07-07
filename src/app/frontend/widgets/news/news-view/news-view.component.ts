@@ -11,22 +11,18 @@ import {NewsSetting} from "@cemizm/smartmirror-shared";
 export class NewsViewComponent implements OnInit {
 
   private feedRss: FeedRSS;
-  private feedUrl: string;
-  private maxCount: number;
   @Input() setting: NewsSetting | NewsSetting;
 
   constructor(private newsService: NewsService) {
 
   }
   ngOnInit() {
-    this.feedUrl = this.setting.feedUrl;
-    this.maxCount = this.setting.maxCount;
-    this.getpolledFeed();
+    this.getFeed();
   }
   getFeed() {
-    this.newsService.getFeedContent(this.feedUrl).subscribe(data => {
+    this.newsService.getFeedContent(this.setting.feedUrl).subscribe(data => {
       this.feedRss = data;
-      this.feedRss.items.splice(this.maxCount);
+      this.feedRss.items.splice(this.setting.maxCount);
     });
   }
   getpolledFeed() {

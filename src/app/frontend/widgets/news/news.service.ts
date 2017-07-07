@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import {Http} from '@angular/http';
-import {Observable} from 'rxjs/Rx';
+import {Injectable} from "@angular/core";
+import {Http} from "@angular/http";
+import {Observable} from "rxjs/Rx";
 import {FeedRSS} from "./news.models";
-import 'rxjs/add/observable/interval';
+import "rxjs/add/observable/interval";
 
 
 @Injectable()
@@ -12,6 +12,7 @@ export class NewsService {
 
   constructor(private http: Http) {
   }
+
   getFeedContent(url: string): Observable<FeedRSS> {
     return this.http.get(this.rssToJsonServiceBaseUrl, {
       params: {
@@ -19,7 +20,8 @@ export class NewsService {
       }
     }).map(res => <FeedRSS>res.json());
   }
-    polledHttpGetRequest(url: string): Observable<FeedRSS> {
+
+  polledHttpGetRequest(url: string): Observable<FeedRSS> {
     return Observable.interval(this.interval)
       .switchMap(() => this.http.get(this.rssToJsonServiceBaseUrl, {
         params: {
