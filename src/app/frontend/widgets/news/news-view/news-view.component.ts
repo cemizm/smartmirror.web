@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {NewsService} from "../news.service";
 import {FeedRSS} from "../news.models";
+import {NewsSetting} from "@cemizm/smartmirror-shared";
 
 @Component({
   selector: 'app-news-view',
@@ -12,13 +13,14 @@ export class NewsViewComponent implements OnInit {
   private feedRss: FeedRSS;
   private feedUrl: string;
   private maxCount: number;
-  @Input() setting: any;
+  @Input() setting: NewsSetting;
 
   constructor(private newsService: NewsService) {
-    this.feedUrl = "http://www.tageschau.de/xml/rss2";
-    this.maxCount = 5;
+
   }
   ngOnInit() {
+    this.feedUrl = this.setting.feedUrl;
+    this.maxCount = this.setting.maxCount;
     this.getpolledFeed();
   }
   getFeed() {

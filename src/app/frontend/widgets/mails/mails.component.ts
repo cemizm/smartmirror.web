@@ -1,4 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
+import {MailSettings} from "@cemizm/smartmirror-shared";
 
 @Component({
   selector: 'app-mails',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input} from '@angular/core';
 })
 export class MailsComponent implements OnInit {
 
-  @Input() setting: any;
+  @Input() setting: MailSettings;
   mails = [
     {
       absender: 'Absender1',

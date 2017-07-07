@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {TaskSetting} from "@cemizm/smartmirror-shared";
 
 @Component({
   selector: 'app-note',
@@ -6,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./note.component.scss']
 })
 export class NoteComponent implements OnInit {
-  @Input() settings: any;
+  @Input() setting: TaskSetting;
   constructor() { }
 
   ngOnInit() {

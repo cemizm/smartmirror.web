@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {CalendarSettings} from "@cemizm/smartmirror-shared";
 
 @Component({
   selector: 'app-calendar-view',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calendar-view.component.scss']
 })
 export class CalendarViewComponent implements OnInit {
+
+  @Input() setting: CalendarSettings;
   dates: Array<string> = ['12.06.2017', '13.06.2017'];
   termineEins = [
     {name: 'Termin1'},

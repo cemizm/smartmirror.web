@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {WeatherForecast} from "../weather.models";
 import {WeatherService} from "../weather.service";
+import {WeatherSetting} from "@cemizm/smartmirror-shared";
 
 @Component({
   selector: 'app-weatherpreview',
@@ -9,7 +10,7 @@ import {WeatherService} from "../weather.service";
 })
 export class WeatherpreviewComponent implements OnInit {
   private weatherForecast: WeatherForecast;
-  @Input() settings: any;
+  @Input() setting: WeatherSetting;
 
   tiles = [
     {text: 'One', cols: 1, rows: 2, color: 'lightblue'},
