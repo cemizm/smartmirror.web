@@ -10,8 +10,8 @@ import {FeedRSS} from "../news.models";
 export class NewsViewComponent implements OnInit {
 
   private feedRss: FeedRSS;
-  private FeedUrl: string;
-  private MaxCount: number;
+  private feedUrl: string;
+  private maxCount: number;
   @Input() setting: any;
 
   constructor(private newsService: NewsService) {
@@ -22,9 +22,9 @@ export class NewsViewComponent implements OnInit {
     this.getpolledFeed();
   }
   getFeed() {
-    this.newsService.getFeedContent(this.FeedUrl).subscribe(data => {
+    this.newsService.getFeedContent(this.feedUrl).subscribe(data => {
       this.feedRss = data;
-      this.feedRss.items.splice(this.MaxCount);
+      this.feedRss.items.splice(this.maxCount);
     });
   }
   getpolledFeed() {
