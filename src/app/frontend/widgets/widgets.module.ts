@@ -7,6 +7,7 @@ import {NoteComponent} from "./note/note.component";
 import {NewsModule} from "./news/news.module";
 import {TodayComponent} from "./today/today.component";
 import {WidgetContainerComponent} from "./widget-container.component";
+import { WidgetDataUtils } from "./utils/widget.data.utils";
 
 @NgModule({
   imports: [

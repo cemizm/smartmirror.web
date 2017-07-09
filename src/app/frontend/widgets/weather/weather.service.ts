@@ -1,14 +1,20 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import {Injectable} from "@angular/core";
+import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import 'rxjs/add/observable/interval';
+import "rxjs/add/observable/interval";
 
 import {
-  WeatherCurrent, WeatherForecast, WeatherInformation, MainInformationCurrent,
-  WeatherListItem, MainInformationForecast, CloudInformation, WindInformation, RainInformation, SysInformationForecast,
-  City, Coord
+  City,
+  Coord,
+  MainInformationCurrent,
+  MainInformationForecast,
+  WeatherCurrent,
+  WeatherForecast,
+  WeatherInformation,
+  WeatherListItem
 } from "./weather.models";
 import {Subject} from "rxjs/Subject";
+import {WidgetDataUtils} from "../utils/widget.data.utils";
 
 const APPID = '70e703682e7eeff15a6ce5ee7635f37e';
 const CITY = 'bielefeld';
@@ -18,12 +24,13 @@ const POLL_INTERVAL_MINUTES = 30;
 @Injectable()
 export class WeatherService {
 
-  private baseUrl= 'http://api.openweathermap.org/data/2.5/';
+  private baseUrl = 'http://api.openweathermap.org/data/2.5/';
 
   private weatherCurrentUrl = this.baseUrl + 'weather?q=' + CITY + '&appid=' + APPID + '&units=metric';
   private weatherForecastUrl = this.baseUrl + 'forecast?q=' + CITY + '&appid=' + APPID + '&units=metric';
   private pollingIntervall = 1000 * 60 * POLL_INTERVAL_MINUTES;
 
+  private widgetDataUtils: WidgetDataUtils;
   private weatherCurrent: WeatherCurrent;
   private weatherForecast: WeatherForecast;
   private weatherCurrentSubject: Subject<WeatherCurrent>;
@@ -31,28 +38,29 @@ export class WeatherService {
   errorMessage: string;
 
   constructor(private http: Http) {
+    this.widgetDataUtils = new WidgetDataUtils(http);
     this.weatherCurrentSubject = new Subject<WeatherCurrent>();
     this.weatherForecastSubject = new Subject<WeatherForecast>();
 
-    this.initialHttpGetRequest(this.weatherCurrentUrl).subscribe(data => {
+    this.widgetDataUtils.initialHttpGetRequest(this.weatherCurrentUrl).subscribe(data => {
         this.weatherCurrent = this.createWeatherCurrent(data);
         this.weatherCurrentSubject.next(this.weatherCurrent);
       }
     );
 
-    this.initialHttpGetRequest(this.weatherForecastUrl).subscribe(data => {
+    this.widgetDataUtils.initialHttpGetRequest(this.weatherForecastUrl).subscribe(data => {
         this.weatherForecast = this.createWeatherForecast(data);
         this.weatherForecastSubject.next(this.weatherForecast);
       }
     );
 
-    this.polledHttpGetRequest(this.weatherCurrentUrl, this.pollingIntervall).subscribe(data => {
+    this.widgetDataUtils.polledHttpGetRequest(this.weatherCurrentUrl, this.pollingIntervall).subscribe(data => {
         this.weatherCurrent = this.createWeatherCurrent(data);
         this.weatherCurrentSubject.next(this.weatherCurrent);
       }
     );
 
-    this.polledHttpGetRequest(this.weatherForecastUrl, this.pollingIntervall).subscribe(data => {
+    this.widgetDataUtils.polledHttpGetRequest(this.weatherForecastUrl, this.pollingIntervall).subscribe(data => {
         this.weatherForecast = this.createWeatherForecast(data);
         this.weatherForecastSubject.next(this.weatherForecast);
       }
@@ -72,7 +80,7 @@ export class WeatherService {
       weatherId: "owf owf-" + data.weather[0].id,
       weatherMain: "",
       weatherDescription: "",
-      icon: "http://openweathermap.org/img/w/"  + data.weather[0].icon + ".png"
+      icon: "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png"
     };
 
     const mainInformationCurrent: MainInformationCurrent = {
@@ -123,7 +131,7 @@ export class WeatherService {
         weatherId: "owf owf-" + element.weather[0].id,
         weatherMain: "",
         weatherDescription: "",
-        icon: "http://openweathermap.org/img/w/"  + element.weather[0].icon + ".png"
+        icon: "http://openweathermap.org/img/w/" + element.weather[0].icon + ".png"
       };
 
       const weatherListItem: WeatherListItem = {
@@ -163,31 +171,4 @@ export class WeatherService {
     };
     return wf;
   }
-
-  polledHttpGetRequest(url: string, interval: number): Observable<any> {
-            return Observable.interval(interval)
-        .switchMap(() => this.http.get(url).map(res => res.json()));
-  }
-
-  initialHttpGetRequest(url: string): Observable<any> {
-    return this.http.get(url)
-      .map(response => response.json())
-      .catch(this.handleError);
-  }
-
-  private handleError (error: any) {
-    // In a real world app, we might use a remote logging infrastructure
-    let errMsg: string;
-    // if (error instanceof Response) {
-    //   const body = error.json() || '';
-    //   const err = body.error || JSON.stringify(body);
-    //   errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    // } else {
-    errMsg = error.message ? error.message : error.toString();
-    // }
-    console.error(errMsg);
-    return Observable.throw(errMsg);
-  }
-
-
 }

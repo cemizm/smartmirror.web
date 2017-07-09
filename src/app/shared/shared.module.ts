@@ -7,6 +7,7 @@ import {MdButtonModule, MdCardModule, MdCheckboxModule, MdGridListModule, MdList
 import {DataCacheService} from "./services/data-cache.service";
 import {MirrorSettingService} from "./services/mirror-setting.service";
 import { MirrorPipe } from './utils/mirror.pipe';
+import {WidgetDataUtils} from '../frontend/widgets/utils/widget.data.utils';
 
 @NgModule({
   imports: [

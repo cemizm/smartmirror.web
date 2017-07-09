@@ -10,7 +10,6 @@ import {CalendarViewComponent} from "./calendar-view/calendar-view.component";
   declarations: [CalendarViewComponent]
 })
 export class CalendarModule implements OnInit {
-  @Input() settings: any;
   constructor() {
   }
   ngOnInit() {
