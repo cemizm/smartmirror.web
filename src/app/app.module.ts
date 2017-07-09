@@ -13,7 +13,7 @@ import {WeatherpreviewComponent} from "./frontend/widgets/weather/weatherpreview
 import {NewsViewComponent} from "./frontend/widgets/news/news-view/news-view.component";
 import {CalendarViewComponent} from "./frontend/widgets/calendar/calendar-view/calendar-view.component";
 import {MailViewComponent} from "./frontend/widgets/mails/mail-view/mail-view.component";
-import {NoteComponent} from "./frontend/widgets/note/note.component";
+import {NoteViewComponent} from "./frontend/widgets/note/note-view/note-view.component";
 
 export const AppRoutes: Routes = [
   {path: 'frontend', loadChildren: './frontend/frontend.module#FrontendModule'},
@@ -31,7 +31,7 @@ export const AppRoutes: Routes = [
     CalendarViewComponent,
     NewsViewComponent,
     MailViewComponent,
-    NoteComponent],
+    NoteViewComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

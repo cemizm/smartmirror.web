@@ -8,7 +8,7 @@ import {Widget} from "@cemizm/smartmirror-shared";
     <app-calendar-view *ngIf="widget.type == 2" [setting]="widget.setting"></app-calendar-view>
     <app-news-view *ngIf="widget.type == 3" [setting]="widget.setting"></app-news-view>
     <app-mail-view *ngIf="widget.type == 4" [setting]="widget.setting"></app-mail-view>
-    <app-note *ngIf="widget.type == 5" [setting]="widget.setting"></app-note>
+    <app-note-view *ngIf="widget.type == 5" [setting]="widget.setting"></app-note-view>
   `
 })
 export class WidgetContainerComponent {

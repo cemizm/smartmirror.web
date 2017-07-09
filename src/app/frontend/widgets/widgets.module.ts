@@ -3,10 +3,10 @@ import {CalendarModule} from "./calendar/calendar.module";
 import {SharedModule} from "../../shared/shared.module";
 import {WeatherModule} from "./weather/weather.module";
 import {MailModule} from "./mails/mail.module";
-import {NoteComponent} from "./note/note.component";
 import {NewsModule} from "./news/news.module";
 import {TodayComponent} from "./today/today.component";
 import {WidgetContainerComponent} from "./widget-container.component";
+import {NoteModule} from "./note/note.module";
 
 @NgModule({
   imports: [
@@ -14,19 +14,19 @@ import {WidgetContainerComponent} from "./widget-container.component";
     CalendarModule,
     WeatherModule,
     NewsModule,
-    MailModule
+    MailModule,
+    NoteModule
   ],
   exports: [
     CalendarModule,
     WeatherModule,
     NewsModule,
     MailModule,
-    NoteComponent,
+    NoteModule,
     TodayComponent,
     WidgetContainerComponent
   ],
   declarations: [
-    NoteComponent,
     TodayComponent,
     WidgetContainerComponent
   ]

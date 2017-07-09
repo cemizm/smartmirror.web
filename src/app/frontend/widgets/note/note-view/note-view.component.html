@@ -1,0 +1,10 @@
+<md-card class="task">
+  <md-list *ngIf="taskList">
+    <div *ngFor="let item of taskList | slice:0:setting.maxCount">
+      <md-list-item>
+        <h5 md-line>{{item.title}}</h5>
+      </md-list-item>
+      <md-divider></md-divider>
+    </div>
+  </md-list>
+</md-card>
