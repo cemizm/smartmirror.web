@@ -1,6 +1,9 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {Task, TaskSetting} from "@cemizm/smartmirror-shared";
-import {NoteService} from "../note.service";
+import {Task, TaskService, TaskSetting} from "@cemizm/smartmirror-shared";
+import {Observable} from "rxjs/Observable";
+
+const interval = 1000 * 60 * 1 / 2;
+
 @Component({
   selector: 'app-note-view',
   templateUrl: './note-view.component.html',
@@ -10,11 +13,18 @@ export class NoteViewComponent implements OnInit {
   private taskList: Array<Task>;
   @Input() setting: TaskSetting | TaskSetting;
 
-  constructor(private noteService: NoteService) {
+  constructor(private taskService: TaskService) {
   }
 
   ngOnInit() {
-    this.noteService.taskListSubject.subscribe(data => this.taskList = data);
+    Observable.timer(0, interval).subscribe(this.update);
   }
 
+  update() {
+    console.log("here");
+    if (!this.setting || !this.setting.oAuthToken || !this.setting.taskListId) {
+      return;
+    }
+    this.taskService.list(this.setting.oAuthToken, this.setting.taskListId).subscribe(data => this.taskList = data);
+  }
 }
