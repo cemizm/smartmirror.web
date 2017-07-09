@@ -10,7 +10,7 @@ export class CalendarService {
   private widgetDataUtils: WidgetDataUtils;
   private calEventList: Array<Event>;
   private _calEventListSubject: Subject<Array<Event>>;
-  private token = "ya29.GluCBFHu3R8WURR5j4eJWFEWhSVtGELqHcQk5NwTE2sk4XHeCpCTatSoWGlF2I0NVmkMryEtZ-908xqF9-42hhshO7gvXOdb5ls1I79e4sjrMXXgKcTHY3BH0s2V";
+  private token = "ya29.GluCBIJUy_eldS0UEnsd7EleZfYZy81MDdR3X-M5PfpDE_DMVp9TWxPl_yVKlMd2yg6AEC7W03va1QK9Nx3EUuN9e0X2g2vR_1ftO2scCLj4_lBhQhr60jlmSrx4";
 
 
   constructor(private http: Http, private calListService: CalendarListService,
@@ -32,5 +32,4 @@ export class CalendarService {
   get calEventListSubject(): Subject<Array<Event>> {
     return this._calEventListSubject;
   }
-
 }

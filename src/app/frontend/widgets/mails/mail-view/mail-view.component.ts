@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {MailSettings} from "@cemizm/smartmirror-shared";
+import {MailSettings, Message} from "@cemizm/smartmirror-shared";
 import {MailService} from "../mail.service";
 
 @Component({
@@ -9,7 +9,7 @@ import {MailService} from "../mail.service";
 })
 export class MailViewComponent implements OnInit {
   @Input() setting: MailSettings | MailSettings;
-  private mailList: Array<any>;
+  private mailList: Array<Message>;
 
   constructor(private mailService: MailService) {
   }
