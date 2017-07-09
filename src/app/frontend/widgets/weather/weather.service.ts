@@ -113,9 +113,6 @@ export class WeatherService {
     let counter = 0;
 
     data.list.forEach(element => {
-      if (counter > 5) {
-        return;
-      }
       const mainInformationForecast: MainInformationForecast = {
         temp: element.main.temp,
         temp_min: 0,
