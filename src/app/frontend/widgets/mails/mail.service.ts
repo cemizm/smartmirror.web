@@ -15,6 +15,7 @@ export class MailService {
   constructor(private http: Http, private messagesService: MessagesService) {
     this.widgetDataUtils = new WidgetDataUtils(http);
     this.mailList = new Array<any>();
+    this.mailList = new Array<Message>();
     this._mailListSubject = new Subject<any>();
 
     messagesService.list(this.token, "me").subscribe(data => {
