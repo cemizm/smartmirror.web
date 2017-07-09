@@ -12,7 +12,7 @@ import {WidgetsModule} from "./frontend/widgets/widgets.module";
 import {WeatherpreviewComponent} from "./frontend/widgets/weather/weatherpreview/weatherpreview.component";
 import {NewsViewComponent} from "./frontend/widgets/news/news-view/news-view.component";
 import {CalendarViewComponent} from "./frontend/widgets/calendar/calendar-view/calendar-view.component";
-import {MailsComponent} from "./frontend/widgets/mails/mails.component";
+import {MailViewComponent} from "./frontend/widgets/mails/mail-view/mail-view.component";
 import {NoteComponent} from "./frontend/widgets/note/note.component";
 
 export const AppRoutes: Routes = [
@@ -30,7 +30,7 @@ export const AppRoutes: Routes = [
     WeatherpreviewComponent,
     CalendarViewComponent,
     NewsViewComponent,
-    MailsComponent,
+    MailViewComponent,
     NoteComponent],
   imports: [
     BrowserModule,

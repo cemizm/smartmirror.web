@@ -1,7 +1,8 @@
 <md-card class="calender">
+  <h3>Kalender</h3>
   <md-list *ngIf="calEventList">
     <div *ngFor="let item of calEventList.items | slice:0:setting.maxCount">
-      <md-list-item >
+      <md-list-item>
         <h5 md-line>{{item.start.dateTime | date:'dd.MM.'}}</h5>
         <h5 md-line style="color: grey">{{item.start.dateTime | date:'HH:mm'}}</h5>
         <h6 md-line> {{item.summary}}</h6>
