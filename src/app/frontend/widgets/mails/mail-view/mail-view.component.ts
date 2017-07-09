@@ -17,5 +17,4 @@ export class MailViewComponent implements OnInit {
   ngOnInit() {
     this.mailService.mailListSubject.subscribe(data => this.mailList = data);
   }
-
 }

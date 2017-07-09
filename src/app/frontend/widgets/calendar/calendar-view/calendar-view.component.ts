@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {CalendarSettings} from "@cemizm/smartmirror-shared";
+import {CalendarSettings, Event} from "@cemizm/smartmirror-shared";
 import {CalendarService} from "../calendar.service";
 
 @Component({
@@ -8,7 +8,7 @@ import {CalendarService} from "../calendar.service";
   styleUrls: ['./calendar-view.component.scss']
 })
 export class CalendarViewComponent implements OnInit {
-  private calEventList: any;
+  private calEventList: Array<Event>;
 
   @Input() setting: CalendarSettings | CalendarSettings;
 
