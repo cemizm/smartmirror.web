@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {MailSettings, Message, MessagesService} from "@cemizm/smartmirror-shared";
+import {MailSettings, Message} from "@cemizm/smartmirror-shared";
 import {Observable} from "rxjs/Observable";
+import {MailService} from "../mail.service";
 
 const interval = 5000;
 
@@ -13,7 +14,7 @@ export class MailViewComponent implements OnInit {
   @Input() setting: MailSettings | MailSettings;
   private mailList: Array<Message>;
 
-  constructor(private messagesService: MessagesService) {
+  constructor(private mailService: MailService) {
   }
 
   ngOnInit() {
@@ -24,14 +25,6 @@ export class MailViewComponent implements OnInit {
     if (!this.setting || !this.setting.oAuthToken) {
       return;
     }
-    this.messagesService.list(this.setting.oAuthToken, "me").subscribe(mailList => {
-      for (let mail of mailList) {
-        this.messagesService.get(this.setting.oAuthToken, "me", mail.id, {
-          format: "metadata"
-        }).subscribe(message => {
-          this.mailList.push(message);
-        });
-      }
-    });
+    this.mailService.getMails(this.setting.oAuthToken, this.setting.maxCount).subscribe(mails => this.mailList = mails);
   }
 }

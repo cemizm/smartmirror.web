@@ -1,6 +1,7 @@
-import {Input, NgModule, OnInit} from "@angular/core";
+import {NgModule} from "@angular/core";
 import {SharedModule} from "../../../shared/shared.module";
 import {MailViewComponent} from "./mail-view/mail-view.component";
+import {MailService} from "./mail.service";
 
 @NgModule({
   imports: [
@@ -8,6 +9,7 @@ import {MailViewComponent} from "./mail-view/mail-view.component";
   ],
   exports: [MailViewComponent],
   declarations: [MailViewComponent],
-  providers: []
+  providers: [MailService]
 })
-export class MailModule { }
+export class MailModule {
+}
