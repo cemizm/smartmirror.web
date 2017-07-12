@@ -22,7 +22,7 @@ export class CalendarViewComponent implements OnInit {
   }
 
   update() {
-    this.eventsService.list(this.setting.oAuthToken, this.setting.calendarId,
+    this.eventsService.list(this.setting.oAuthToken, "primary",
       {
         orderBy: "startTime",
         singleEvents: true,
