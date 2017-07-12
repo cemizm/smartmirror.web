@@ -17,11 +17,10 @@ export class NoteViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    Observable.timer(0, interval).subscribe(this.update);
+    Observable.timer(0, interval).subscribe(() => this.update());
   }
 
   update() {
-    console.log("here");
     if (!this.setting || !this.setting.oAuthToken || !this.setting.taskListId) {
       return;
     }
