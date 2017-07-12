@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {CalendarSettings, Event} from "@cemizm/smartmirror-shared";
-import {CalendarService} from "../calendar.service";
+import {CalendarSettings, Event, EventsService} from "@cemizm/smartmirror-shared";
+import {Observable} from "rxjs";
+
+const UPDATE_INTERVAL = 1000 * 60 * 0.5;
 
 @Component({
   selector: 'app-calendar-view',
@@ -12,10 +14,21 @@ export class CalendarViewComponent implements OnInit {
 
   @Input() setting: CalendarSettings | CalendarSettings;
 
-  constructor(private calendarService: CalendarService) {
+  constructor(private eventsService: EventsService) {
   }
 
   ngOnInit() {
-    this.calendarService.calEventListSubject.subscribe(data => this.calEventList = data);
+    Observable.timer(0, UPDATE_INTERVAL).subscribe(() => this.update());
+  }
+
+  update() {
+    this.eventsService.list(this.setting.oAuthToken, this.setting.calendarId,
+      {
+        orderBy: "startTime",
+        singleEvents: true,
+        timeMin: new Date().toISOString()
+      }).subscribe(events => {
+      this.calEventList = events;
+    });
   }
 }
