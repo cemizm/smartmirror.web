@@ -183,7 +183,6 @@ export class WeatherService {
         let iconCount = 0;
         for (let iconDict in dict) {
           if (dict[iconDict] > iconCount) {
-            console.log("elementdict");
             icon = iconDict;
             iconCount = dict[iconDict];
           }
@@ -200,16 +199,13 @@ export class WeatherService {
         temp += mainInformationForecast.temp;
         count++;
         let dictAdd = false;
-        console.log("dict");
         for (let iconDict in dict) {
           if (iconDict === weatherInformation.icon) {
-            console.log("dictelement");
             dict[iconDict]++;
             dictAdd = true;
           }
         }
         if (dictAdd === false) {
-          console.log("dictAdd");
           dict[weatherInformation.icon] = 1;
         }
       }
