@@ -155,55 +155,61 @@ export class WeatherService {
         dt_txt: ""
       };
       if (datumNow === " ") {
-      let datumNow = new Date(Date.now()).toString();
-      let daten = datumNow.split(" ");
+      datumNow = new Date(Date.now()).toString();
+      const daten = datumNow.split(" ");
       datumNow = daten[1] + daten[2] + daten[3];
       }
       if (datum === " ") {
-        let datum = new Date(weatherListItem.dt).toString();
-        let daten = datum.split(" ");
+        datum = new Date(weatherListItem.dt).toString();
+        const daten = datum.split(" ");
         datum = daten[1] + daten[2] + daten[3];
         dateMilli = weatherListItem.dt;
+        if (datum === datumNow) {
+          datum = " ";
+        }
       }
       if (datum !== " " && datum2 === " ") {
-        let datum2 = new Date(weatherListItem.dt).toString();
-        let daten = datum2.split(" ");
+        datum2 = new Date(weatherListItem.dt).toString();
+        const daten = datum2.split(" ");
         datum2 = daten[1] + daten[2] + daten[3];
         if (datum === datum2) {
           datum2 = " ";
         }
       }
-      if (datum !== " " && datum2 !== " " && datum !== datum2 && count < 7 ) {
-        console.log("Datum " + datum);
-        console.log("Datum2 " + datum2);
+      if (datum !== " " && datum2 !== " " && count > 7 ) {
         mainInformationForecast.temp = temp / count;
-        let tempDateMilli = weatherListItem.dt;
         weatherListItem.dt = dateMilli;
         let icon = " ";
         let iconCount = 0;
-        for (element in dict) {
-          if (element.value > iconCount) {
-            icon = element.key;
+        for (let iconDict in dict) {
+          if (dict[iconDict] > iconCount) {
+            console.log("elementdict");
+            icon = iconDict;
+            iconCount = dict[iconDict];
           }
         }
         weatherInformation.icon = icon;
         weatherList.push(weatherListItem);
-        weatherListItem.dt = tempDateMilli;
-        datum = datum2;
+        dateMilli = 0;
+        datum = " ";
         datum2 = " ";
+        temp = 0;
         count = 1;
         dict = {};
       }else {
         temp += mainInformationForecast.temp;
         count++;
         let dictAdd = false;
-        for (element in dict) {
-          if (element.key === weatherInformation.icon) {
-            element.value++;
+        console.log("dict");
+        for (let iconDict in dict) {
+          if (iconDict === weatherInformation.icon) {
+            console.log("dictelement");
+            dict[iconDict]++;
             dictAdd = true;
           }
         }
         if (dictAdd === false) {
+          console.log("dictAdd");
           dict[weatherInformation.icon] = 1;
         }
       }
