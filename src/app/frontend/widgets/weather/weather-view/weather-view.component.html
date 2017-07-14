@@ -1,3 +1,51 @@
-<p>
-  weather-view works!
-</p>
+<md-card class="weather-view" *ngIf="weatherForecast && weatherForecastFirst">
+  <md-grid-list cols="3" rowHeigt="10%" *ngIf="weatherCurrent">
+    <md-grid-tile colspan=3 rowspan=1 style="font-size: 200%">
+      {{weatherCurrent.name}}
+    </md-grid-tile>
+    <md-grid-tile colspan=1 rowspan=1>
+      <i class={{weatherCurrent.weatherinformation.weatherId}} style="font-size: 400%"></i>
+    </md-grid-tile>
+    <md-grid-tile colspan=2 rowspan=1 style="font-size: 200%">
+      {{weatherCurrent.maininformation.temp | number: '.0-0'}} °C
+    </md-grid-tile>
+  </md-grid-list>
+
+  <md-grid-list cols="3" rowHeigt="10%">
+    <md-grid-tile colspan="1" rowspan="1">
+      <div fxLayout="column" fxLayoutAlign="stretch stretch">
+        <i class={{weatherForecastFirst.weatherList[0].weatherinformation.weatherId}} style="font-size: 200%"></i>
+        <div style="font-size: 120%">{{weatherForecastFirst.weatherList[0].maininformation.temp | number: '.0-0'}} °C  </div>
+        <div style="color: grey">{{weatherForecastFirst.weatherList[0].dt | date:'HH:mm'}}</div>
+      </div>
+    </md-grid-tile>
+    <md-grid-tile colspan="1" rowspan="1">
+      <div fxLayout="column" fxLayoutAlign="stretch stretch">
+        <i class={{weatherForecastFirst.weatherList[1].weatherinformation.weatherId}} style="font-size: 200%"></i>
+        <div style="font-size: 120%">{{weatherForecastFirst.weatherList[1].maininformation.temp | number: '.0-0'}} °C  </div>
+        <div style="color: grey">{{weatherForecastFirst.weatherList[1].dt | date:'HH:mm'}}</div>
+      </div>
+    </md-grid-tile>
+    <md-grid-tile colspan="1" rowspan="1">
+      <div fxLayout="column" fxLayoutAlign="stretch stretch">
+        <i class={{weatherForecastFirst.weatherList[2].weatherinformation.weatherId}} style="font-size: 200%"></i>
+        <div style="font-size: 120%">{{weatherForecastFirst.weatherList[2].maininformation.temp | number: '.0-0'}} °C  </div>
+        <div style="color: grey">{{weatherForecastFirst.weatherList[2].dt | date:'HH:mm'}}</div>
+      </div>
+    </md-grid-tile>
+  </md-grid-list>
+  <md-divider></md-divider>
+  <md-list>
+    <md-list-item *ngFor="let weatherItem of weatherForecast.weatherList">
+      <!--input type="date" ng-model="myDate" ng-init="myDate - 22000 = "-->
+      <div fxLayout="row" fxLayoutAlign="stretch stretch">
+        <div style="color: grey">{{weatherItem.dt | date:'dd.MM.'}} </div>
+        <i class={{weatherItem.weatherinformation.weatherId}} style="font-size: 200%"></i>
+        <div style="font-size: 120%">{{weatherItem.maininformation.temp | number: '.0-0'}} °C  </div>
+      </div>
+    </md-list-item>
+  </md-list>
+  <p style="font-size: 80% ;color: grey">
+    letztes Update: {{weatherCurrent.dt | date:'dd.MM. HH:mm'}}
+  </p>
+</md-card>

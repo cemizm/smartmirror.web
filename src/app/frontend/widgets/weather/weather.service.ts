@@ -24,7 +24,8 @@ const POLL_INTERVAL_MINUTES = 30;
 @Injectable()
 export class WeatherService {
 
-  private baseUrl = 'http://api.openweathermap.org/data/2.5/';
+  private baseUrl= 'http://api.openweathermap.org/data/2.5/'
+  private interval = 1000 * 60 *30;
 
   private weatherCurrentUrl = this.baseUrl + 'weather?q=' + CITY + '&appid=' + APPID + '&units=metric';
   private weatherForecastUrl = this.baseUrl + 'forecast?q=' + CITY + '&appid=' + APPID + '&units=metric';
@@ -111,8 +112,18 @@ export class WeatherService {
   createWeatherForecast(data: any) {
     let weatherList: Array<WeatherListItem> = [];
     let counter = 0;
+    let count = 1;
+    let datumNow = " ";
+    let datum = " ";
+    let datum2 = " ";
+    let dateMilli = 0;
+    let temp = 0;
+    let dict: { [id: string]: number; } = {};
 
     data.list.forEach(element => {
+      if (counter > 32) {
+        return;
+      }
       const mainInformationForecast: MainInformationForecast = {
         temp: element.main.temp,
         temp_min: 0,
@@ -143,7 +154,59 @@ export class WeatherService {
          */
         dt_txt: ""
       };
-      weatherList.push(weatherListItem);
+      if (datumNow === " ") {
+      let datumNow = new Date(Date.now()).toString();
+      let daten = datumNow.split(" ");
+      datumNow = daten[1] + daten[2] + daten[3];
+      }
+      if (datum === " ") {
+        let datum = new Date(weatherListItem.dt).toString();
+        let daten = datum.split(" ");
+        datum = daten[1] + daten[2] + daten[3];
+        dateMilli = weatherListItem.dt;
+      }
+      if (datum !== " " && datum2 === " ") {
+        let datum2 = new Date(weatherListItem.dt).toString();
+        let daten = datum2.split(" ");
+        datum2 = daten[1] + daten[2] + daten[3];
+        if (datum === datum2) {
+          datum2 = " ";
+        }
+      }
+      if (datum !== " " && datum2 !== " " && datum !== datum2 && count < 7 ) {
+        console.log("Datum " + datum);
+        console.log("Datum2 " + datum2);
+        mainInformationForecast.temp = temp / count;
+        let tempDateMilli = weatherListItem.dt;
+        weatherListItem.dt = dateMilli;
+        let icon = " ";
+        let iconCount = 0;
+        for (element in dict) {
+          if (element.value > iconCount) {
+            icon = element.key;
+          }
+        }
+        weatherInformation.icon = icon;
+        weatherList.push(weatherListItem);
+        weatherListItem.dt = tempDateMilli;
+        datum = datum2;
+        datum2 = " ";
+        count = 1;
+        dict = {};
+      }else {
+        temp += mainInformationForecast.temp;
+        count++;
+        let dictAdd = false;
+        for (element in dict) {
+          if (element.key === weatherInformation.icon) {
+            element.value++;
+            dictAdd = true;
+          }
+        }
+        if (dictAdd === false) {
+          dict[weatherInformation.icon] = 1;
+        }
+      }
       counter++;
     });
 
@@ -168,4 +231,138 @@ export class WeatherService {
     };
     return wf;
   }
+  createWeatherForecastFirst(data: any) {
+    let weatherList: Array<WeatherListItem> = [];
+    let counter = 0;
+    let firstThree = 0;
+
+    data.list.forEach(element => {
+      if (counter > 32) {
+        return;
+      }
+      const mainInformationForecast: MainInformationForecast = {
+        temp: element.main.temp,
+        temp_min: 0,
+        temp_max: 0,
+        pressure: 0,
+        sea_level: 0,
+        grnd_level: 0,
+        humidity: 0,
+        temp_kf: 0
+      };
+
+      const weatherInformation: WeatherInformation = {
+        weatherId: "owf owf-" + element.weather[0].id,
+        weatherMain: "",
+        weatherDescription: "",
+        icon: "http://openweathermap.org/img/w/" + element.weather[0].icon + ".png"
+      };
+
+      const weatherListItem: WeatherListItem = {
+        dt: element.dt * 1000,
+        maininformation: mainInformationForecast,
+        weatherinformation: weatherInformation,
+        /*
+         cloudinformation: cloudInformation,
+         windinformation: windInformation,
+         raininformation: rainInformation,
+         sysinformation: sysInformationForecast,
+         */
+        dt_txt: ""
+      };
+      if(firstThree < 3) {
+        weatherList.push(weatherListItem);
+        firstThree++;
+      }
+      counter++;
+    });
+
+    const coord: Coord = {
+      lat: 0,
+      lon: 0
+    };
+
+    const city: City = {
+      id: 0,
+      name: "",
+      coord: coord,
+      country: ""
+    };
+
+    const wf: WeatherForecast = {
+      city: city,
+      weatherList: weatherList,
+      cnt: 0,
+      message: 0,
+      cod: 0
+    };
+    return wf;
+  }
+
+
+  polledHttpGetRequest(url: string, interval: number): Observable<any> {
+    return Observable.interval(interval)
+      .switchMap(() => this.http.get(url).map(res => res.json()));
+  }
+  polledHttpGetRequestCurrent(city: string): Observable<any> {
+    return Observable.interval(this.interval)
+      .switchMap(() => this.http.get(this.baseUrl + "weather", {
+        params: {
+          'q': city,
+          'appid': APPID,
+          'units': "metric"
+        }
+      }).map(res => res.json()));
+  }
+  polledHttpGetRequestPreview(city: string): Observable<any> {
+    return Observable.interval(this.interval)
+      .switchMap(() => this.http.get(this.baseUrl + "forecast", {
+        params: {
+          'q': city,
+          'appid': APPID,
+          'units': "metric"
+        }
+      }).map(res => res.json()));
+  }
+  initialHttpGetRequest(url: string): Observable<any> {
+    return this.http.get(url)
+      .map(response => response.json())
+      .catch(this.handleError);
+  }
+  initialHttpGetRequestCurrent(city: string): Observable<any> {
+    return this.http.get(this.baseUrl + "weather", {
+      params: {
+        'q': city,
+        'appid': APPID,
+        'units': "metric"
+      }
+    }).map(res => res.json())
+      .catch(this.handleError);
+  }
+  initialHttpGetRequestPreview(city: string): Observable<any> {
+    return this.http.get(this.baseUrl + "forecast", {
+      params: {
+        'q': city,
+        'appid': APPID,
+        'units': "metric"
+      }
+    }).map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  private handleError (error: any) {
+    // In a real world app, we might use a remote logging infrastructure
+    let errMsg: string;
+    // if (error instanceof Response) {
+    //   const body = error.json() || '';
+    //   const err = body.error || JSON.stringify(body);
+    //   errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    // } else {
+    errMsg = error.message ? error.message : error.toString();
+    // }
+    console.error(errMsg);
+    return Observable.throw(errMsg);
+  }
+
+
 }

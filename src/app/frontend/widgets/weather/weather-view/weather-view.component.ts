@@ -10,14 +10,22 @@ import {WeatherSetting} from "@cemizm/smartmirror-shared";
 })
 export class WeatherViewComponent implements OnInit {
   private weatherForecast: WeatherForecast;
+  private weatherForecastFirst: WeatherForecast;
   private weatherCurrent: WeatherCurrent;
   @Input() setting: WeatherSetting | WeatherSetting;
+  city = 'bielefeld';
 
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit() {
-    this.weatherService.getWeatherForecastSubject().subscribe(data => this.weatherForecast = data);
-    this.weatherService.getWeatherCurrentSubject().subscribe(data => this.weatherCurrent = data);
+    this.weatherService.initialHttpGetRequestCurrent(this.city)
+      .subscribe(data => this.weatherCurrent = this.weatherService.createWeatherCurrent(data));
+    this.weatherService.polledHttpGetRequestCurrent(this.city).subscribe(data => this.weatherForecast = data);
+    this.weatherService.initialHttpGetRequestPreview(this.city)
+      .subscribe(data => this.weatherForecast = this.weatherService.createWeatherForecast(data));
+    this.weatherService.polledHttpGetRequestPreview(this.city).subscribe(data => this.weatherForecast = data);
+    this.weatherService.initialHttpGetRequestPreview(this.city)
+      .subscribe(data => this.weatherForecastFirst = this.weatherService.createWeatherForecastFirst(data));
+    this.weatherService.polledHttpGetRequestPreview(this.city).subscribe(data => this.weatherForecastFirst = data);
   }
-
 }
