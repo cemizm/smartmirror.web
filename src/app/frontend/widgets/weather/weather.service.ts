@@ -12,67 +12,18 @@ import {
   WeatherInformation,
   WeatherListItem
 } from "./weather.models";
-import {Subject} from "rxjs/Subject";
-import {WidgetDataUtils} from "../utils/widget.data.utils";
 
 const APPID = '70e703682e7eeff15a6ce5ee7635f37e';
-const CITY = 'bielefeld';
-const POLL_INTERVAL_MINUTES = 30;
 
 
 @Injectable()
 export class WeatherService {
 
-  private baseUrl = 'http://api.openweathermap.org/data/2.5/'
+  private baseUrl = 'http://api.openweathermap.org/data/2.5/';
   private interval = 1000 * 60 * 30;
-
-  private weatherCurrentUrl = this.baseUrl + 'weather?q=' + CITY + '&appid=' + APPID + '&units=metric';
-  private weatherForecastUrl = this.baseUrl + 'forecast?q=' + CITY + '&appid=' + APPID + '&units=metric';
-  private pollingIntervall = 1000 * 60 * POLL_INTERVAL_MINUTES;
-
-  private widgetDataUtils: WidgetDataUtils;
-  private weatherCurrent: WeatherCurrent;
-  private weatherForecast: WeatherForecast;
-  private weatherCurrentSubject: Subject<WeatherCurrent>;
-  private weatherForecastSubject: Subject<WeatherForecast>;
   errorMessage: string;
 
   constructor(private http: Http) {
-    this.widgetDataUtils = new WidgetDataUtils(http);
-    this.weatherCurrentSubject = new Subject<WeatherCurrent>();
-    this.weatherForecastSubject = new Subject<WeatherForecast>();
-
-    this.widgetDataUtils.initialHttpGetRequest(this.weatherCurrentUrl).subscribe(data => {
-        this.weatherCurrent = this.createWeatherCurrent(data);
-        this.weatherCurrentSubject.next(this.weatherCurrent);
-      }
-    );
-
-    this.widgetDataUtils.initialHttpGetRequest(this.weatherForecastUrl).subscribe(data => {
-        this.weatherForecast = this.createWeatherForecast(data);
-        this.weatherForecastSubject.next(this.weatherForecast);
-      }
-    );
-
-    this.widgetDataUtils.polledHttpGetRequest(this.weatherCurrentUrl, this.pollingIntervall).subscribe(data => {
-        this.weatherCurrent = this.createWeatherCurrent(data);
-        this.weatherCurrentSubject.next(this.weatherCurrent);
-      }
-    );
-
-    this.widgetDataUtils.polledHttpGetRequest(this.weatherForecastUrl, this.pollingIntervall).subscribe(data => {
-        this.weatherForecast = this.createWeatherForecast(data);
-        this.weatherForecastSubject.next(this.weatherForecast);
-      }
-    );
-  }
-
-  getWeatherCurrentSubject(): Observable<WeatherCurrent> {
-    return this.weatherCurrentSubject;
-  }
-
-  getWeatherForecastSubject(): Observable<WeatherForecast> {
-    return this.weatherForecastSubject;
   }
 
   createWeatherCurrent(data: WeatherCurrent) {
@@ -274,14 +225,8 @@ export class WeatherService {
     return wf;
   }
 
-
-  polledHttpGetRequest(url: string, interval: number): Observable<any> {
-    return Observable.interval(interval)
-      .switchMap(() => this.http.get(url).map(res => res.json()));
-  }
-
   polledHttpGetRequestCurrent(city: string): Observable<any> {
-    return Observable.interval(this.interval)
+    return Observable.timer(0, this.interval)
       .switchMap(() => this.http.get(this.baseUrl + "weather", {
         params: {
           'q': city,
@@ -292,7 +237,7 @@ export class WeatherService {
   }
 
   polledHttpGetRequestPreview(city: string): Observable<any> {
-    return Observable.interval(this.interval)
+    return Observable.timer(0, this.interval)
       .switchMap(() => this.http.get(this.baseUrl + "forecast", {
         params: {
           'q': city,
@@ -300,34 +245,6 @@ export class WeatherService {
           'units': "metric"
         }
       }).map(res => res.json()));
-  }
-
-  initialHttpGetRequest(url: string): Observable<any> {
-    return this.http.get(url)
-      .map(response => response.json())
-      .catch(this.handleError);
-  }
-
-  initialHttpGetRequestCurrent(city: string): Observable<WeatherCurrent> {
-    return this.http.get(this.baseUrl + "weather", {
-      params: {
-        'q': city,
-        'appid': APPID,
-        'units': "metric"
-      }
-    }).map(res => <WeatherCurrent>res.json())
-      .catch(this.handleError);
-  }
-
-  initialHttpGetRequestPreview(city: string): Observable<any> {
-    return this.http.get(this.baseUrl + "forecast", {
-      params: {
-        'q': city,
-        'appid': APPID,
-        'units': "metric"
-      }
-    }).map(res => res.json())
-      .catch(this.handleError);
   }
 
   private handleError(error: any) {
@@ -343,6 +260,4 @@ export class WeatherService {
     console.error(errMsg);
     return Observable.throw(errMsg);
   }
-
-
 }
