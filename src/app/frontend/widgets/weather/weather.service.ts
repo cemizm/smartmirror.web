@@ -6,7 +6,6 @@ import "rxjs/add/observable/interval";
 import {
   City,
   Coord,
-  MainInformationCurrent,
   MainInformationForecast,
   WeatherCurrent,
   WeatherForecast,
@@ -24,8 +23,8 @@ const POLL_INTERVAL_MINUTES = 30;
 @Injectable()
 export class WeatherService {
 
-  private baseUrl= 'http://api.openweathermap.org/data/2.5/'
-  private interval = 1000 * 60 *30;
+  private baseUrl = 'http://api.openweathermap.org/data/2.5/'
+  private interval = 1000 * 60 * 30;
 
   private weatherCurrentUrl = this.baseUrl + 'weather?q=' + CITY + '&appid=' + APPID + '&units=metric';
   private weatherForecastUrl = this.baseUrl + 'forecast?q=' + CITY + '&appid=' + APPID + '&units=metric';
@@ -76,37 +75,10 @@ export class WeatherService {
     return this.weatherForecastSubject;
   }
 
-  createWeatherCurrent(data: any) {
-    const weatherInformation: WeatherInformation = {
-      weatherId: "owf owf-" + data.weather[0].id,
-      weatherMain: "",
-      weatherDescription: "",
-      icon: "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png"
-    };
-
-    const mainInformationCurrent: MainInformationCurrent = {
-      temp: data.main.temp,
-      pressure: 0,
-      humidity: 0,
-      temp_min: 0,
-      temp_max: 0
-    };
-
-    const wc: WeatherCurrent = {
-      coord: null,
-      weatherinformation: weatherInformation,
-      base: "",
-      maininformation: mainInformationCurrent,
-      visibility: 0,
-      windinformation: null,
-      cloudinformation: null,
-      dt: data.dt * 1000,
-      sysInformation: null,
-      id: 0,
-      name: data.name,
-      cod: 0
-    };
-    return wc;
+  createWeatherCurrent(data: WeatherCurrent) {
+    data.weather[0].id = "owf owf-" + data.weather[0].id;
+    data.dt *= 1000;
+    return data;
   }
 
   createWeatherForecast(data: any) {
@@ -136,9 +108,9 @@ export class WeatherService {
       };
 
       const weatherInformation: WeatherInformation = {
-        weatherId: "owf owf-" + element.weather[0].id,
-        weatherMain: "",
-        weatherDescription: "",
+        id: "owf owf-" + element.weather[0].id,
+        main: "",
+        description: "",
         icon: "http://openweathermap.org/img/w/" + element.weather[0].icon + ".png"
       };
 
@@ -155,9 +127,9 @@ export class WeatherService {
         dt_txt: ""
       };
       if (datumNow === " ") {
-      datumNow = new Date(Date.now()).toString();
-      const daten = datumNow.split(" ");
-      datumNow = daten[1] + daten[2] + daten[3];
+        datumNow = new Date(Date.now()).toString();
+        const daten = datumNow.split(" ");
+        datumNow = daten[1] + daten[2] + daten[3];
       }
       if (datum === " ") {
         datum = new Date(weatherListItem.dt).toString();
@@ -176,7 +148,7 @@ export class WeatherService {
           datum2 = " ";
         }
       }
-      if (datum !== " " && datum2 !== " " && count > 7 ) {
+      if (datum !== " " && datum2 !== " " && count > 7) {
         mainInformationForecast.temp = temp / count;
         weatherListItem.dt = dateMilli;
         let icon = " ";
@@ -195,7 +167,7 @@ export class WeatherService {
         temp = 0;
         count = 1;
         dict = {};
-      }else {
+      } else {
         temp += mainInformationForecast.temp;
         count++;
         let dictAdd = false;
@@ -233,6 +205,7 @@ export class WeatherService {
     };
     return wf;
   }
+
   createWeatherForecastFirst(data: any) {
     let weatherList: Array<WeatherListItem> = [];
     let counter = 0;
@@ -254,9 +227,9 @@ export class WeatherService {
       };
 
       const weatherInformation: WeatherInformation = {
-        weatherId: "owf owf-" + element.weather[0].id,
-        weatherMain: "",
-        weatherDescription: "",
+        id: "owf owf-" + element.weather[0].id,
+        main: "",
+        description: "",
         icon: "http://openweathermap.org/img/w/" + element.weather[0].icon + ".png"
       };
 
@@ -272,7 +245,7 @@ export class WeatherService {
          */
         dt_txt: ""
       };
-      if(firstThree < 3) {
+      if (firstThree < 3) {
         weatherList.push(weatherListItem);
         firstThree++;
       }
@@ -306,6 +279,7 @@ export class WeatherService {
     return Observable.interval(interval)
       .switchMap(() => this.http.get(url).map(res => res.json()));
   }
+
   polledHttpGetRequestCurrent(city: string): Observable<any> {
     return Observable.interval(this.interval)
       .switchMap(() => this.http.get(this.baseUrl + "weather", {
@@ -316,6 +290,7 @@ export class WeatherService {
         }
       }).map(res => res.json()));
   }
+
   polledHttpGetRequestPreview(city: string): Observable<any> {
     return Observable.interval(this.interval)
       .switchMap(() => this.http.get(this.baseUrl + "forecast", {
@@ -326,21 +301,24 @@ export class WeatherService {
         }
       }).map(res => res.json()));
   }
+
   initialHttpGetRequest(url: string): Observable<any> {
     return this.http.get(url)
       .map(response => response.json())
       .catch(this.handleError);
   }
-  initialHttpGetRequestCurrent(city: string): Observable<any> {
+
+  initialHttpGetRequestCurrent(city: string): Observable<WeatherCurrent> {
     return this.http.get(this.baseUrl + "weather", {
       params: {
         'q': city,
         'appid': APPID,
         'units': "metric"
       }
-    }).map(res => res.json())
+    }).map(res => <WeatherCurrent>res.json())
       .catch(this.handleError);
   }
+
   initialHttpGetRequestPreview(city: string): Observable<any> {
     return this.http.get(this.baseUrl + "forecast", {
       params: {
@@ -352,7 +330,7 @@ export class WeatherService {
       .catch(this.handleError);
   }
 
-  private handleError (error: any) {
+  private handleError(error: any) {
     // In a real world app, we might use a remote logging infrastructure
     let errMsg: string;
     // if (error instanceof Response) {

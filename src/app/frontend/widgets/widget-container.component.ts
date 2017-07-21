@@ -4,7 +4,7 @@ import {Widget} from "@cemizm/smartmirror-shared";
 @Component({
   selector: 'app-widget-container',
   template: `
-    <app-weatherpreview *ngIf="widget.type == 1" [setting]="widget.setting"></app-weatherpreview>
+    <app-weather-view *ngIf="widget.type == 1" [setting]="widget.setting"></app-weather-view>
     <app-calendar-view *ngIf="widget.type == 2" [setting]="widget.setting"></app-calendar-view>
     <app-news-view *ngIf="widget.type == 3" [setting]="widget.setting"></app-news-view>
     <app-mail-view *ngIf="widget.type == 4" [setting]="widget.setting"></app-mail-view>

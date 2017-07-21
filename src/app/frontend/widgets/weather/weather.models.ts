@@ -10,14 +10,14 @@ export interface WeatherForecast {
 }
 export interface WeatherCurrent {
   coord: Coord;
-  weatherinformation: WeatherInformation;
+  weather: Array<WeatherInformation>;
   base: string;
-  maininformation: MainInformationCurrent;
+  main: MainInformationCurrent;
   visibility: number;
-  windinformation: WindInformation;
-  cloudinformation: CloudInformation;
+  wind: WindInformation;
+  clouds: CloudInformation;
   dt: number;
-  sysInformation: SysInformationCurrent;
+  sys: SysInformationCurrent;
   id: number;
   name: string;
   cod: number;
@@ -37,11 +37,11 @@ export interface WeatherListItem {
   maininformation: MainInformationForecast;
   weatherinformation: WeatherInformation;
   /*
-  cloudinformation: CloudInformation;
-  windinformation: WindInformation;
-  raininformation: RainInformation;
-  sysinformation: SysInformationForecast;
-  */
+   cloudinformation: CloudInformation;
+   windinformation: WindInformation;
+   raininformation: RainInformation;
+   sysinformation: SysInformationForecast;
+   */
   dt_txt: string;
 }
 export interface MainInformationForecast {
@@ -62,9 +62,9 @@ export interface MainInformationCurrent {
   temp_max: number;
 }
 export interface WeatherInformation {
-  weatherId: string;
-  weatherMain: string;
-  weatherDescription: string;
+  id: string;
+  main: string;
+  description: string;
   icon: string;
 }
 export interface CloudInformation {
