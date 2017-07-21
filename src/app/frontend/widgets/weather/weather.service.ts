@@ -41,30 +41,6 @@ export class WeatherService {
     this.widgetDataUtils = new WidgetDataUtils(http);
     this.weatherCurrentSubject = new Subject<WeatherCurrent>();
     this.weatherForecastSubject = new Subject<WeatherForecast>();
-
-    this.widgetDataUtils.initialHttpGetRequest(this.weatherCurrentUrl).subscribe(data => {
-        this.weatherCurrent = this.createWeatherCurrent(data);
-        this.weatherCurrentSubject.next(this.weatherCurrent);
-      }
-    );
-
-    this.widgetDataUtils.initialHttpGetRequest(this.weatherForecastUrl).subscribe(data => {
-        this.weatherForecast = this.createWeatherForecast(data);
-        this.weatherForecastSubject.next(this.weatherForecast);
-      }
-    );
-
-    this.widgetDataUtils.polledHttpGetRequest(this.weatherCurrentUrl, this.pollingIntervall).subscribe(data => {
-        this.weatherCurrent = this.createWeatherCurrent(data);
-        this.weatherCurrentSubject.next(this.weatherCurrent);
-      }
-    );
-
-    this.widgetDataUtils.polledHttpGetRequest(this.weatherForecastUrl, this.pollingIntervall).subscribe(data => {
-        this.weatherForecast = this.createWeatherForecast(data);
-        this.weatherForecastSubject.next(this.weatherForecast);
-      }
-    );
   }
 
   getWeatherCurrentSubject(): Observable<WeatherCurrent> {
@@ -274,14 +250,8 @@ export class WeatherService {
     return wf;
   }
 
-
-  polledHttpGetRequest(url: string, interval: number): Observable<any> {
-    return Observable.interval(interval)
-      .switchMap(() => this.http.get(url).map(res => res.json()));
-  }
-
   polledHttpGetRequestCurrent(city: string): Observable<any> {
-    return Observable.interval(this.interval)
+    return Observable.timer(0, this.interval)
       .switchMap(() => this.http.get(this.baseUrl + "weather", {
         params: {
           'q': city,
@@ -292,7 +262,7 @@ export class WeatherService {
   }
 
   polledHttpGetRequestPreview(city: string): Observable<any> {
-    return Observable.interval(this.interval)
+    return Observable.timer(0, this.interval)
       .switchMap(() => this.http.get(this.baseUrl + "forecast", {
         params: {
           'q': city,
@@ -300,34 +270,6 @@ export class WeatherService {
           'units': "metric"
         }
       }).map(res => res.json()));
-  }
-
-  initialHttpGetRequest(url: string): Observable<any> {
-    return this.http.get(url)
-      .map(response => response.json())
-      .catch(this.handleError);
-  }
-
-  initialHttpGetRequestCurrent(city: string): Observable<WeatherCurrent> {
-    return this.http.get(this.baseUrl + "weather", {
-      params: {
-        'q': city,
-        'appid': APPID,
-        'units': "metric"
-      }
-    }).map(res => <WeatherCurrent>res.json())
-      .catch(this.handleError);
-  }
-
-  initialHttpGetRequestPreview(city: string): Observable<any> {
-    return this.http.get(this.baseUrl + "forecast", {
-      params: {
-        'q': city,
-        'appid': APPID,
-        'units': "metric"
-      }
-    }).map(res => res.json())
-      .catch(this.handleError);
   }
 
   private handleError(error: any) {
@@ -343,6 +285,4 @@ export class WeatherService {
     console.error(errMsg);
     return Observable.throw(errMsg);
   }
-
-
 }
