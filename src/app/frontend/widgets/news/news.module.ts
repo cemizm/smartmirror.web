@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {SharedModule} from "../../../shared/shared.module";
 import {NewsViewComponent} from "./news-view/news-view.component";
 import {NewsService} from "./news.service";
@@ -9,6 +9,7 @@ import {NewsService} from "./news.service";
   ],
   exports: [NewsViewComponent],
   declarations: [NewsViewComponent],
-  providers:[NewsService]
+  providers: [NewsService]
 })
-export class NewsModule { }
+export class NewsModule {
+}
