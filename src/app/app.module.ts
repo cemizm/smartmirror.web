@@ -1,7 +1,6 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {BrowserModule} from "@angular/platform-browser";
-
 import {AppComponent} from "./app.component";
 import {SharedModule} from "./shared/shared.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -34,7 +33,7 @@ export const AppRoutes: Routes = [
     RouterModule.forRoot(AppRoutes),
     WidgetsModule,
 
-    SmartMirrorModule.forRoot({apiUrl: environment.api}),
+    SmartMirrorModule.forRoot({apiUrl: environment.api, rtUrl: environment.socket}),
 
     SharedModule.forRoot()
   ],
