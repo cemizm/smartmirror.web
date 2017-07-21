@@ -12,43 +12,18 @@ import {
   WeatherInformation,
   WeatherListItem
 } from "./weather.models";
-import {Subject} from "rxjs/Subject";
-import {WidgetDataUtils} from "../utils/widget.data.utils";
 
 const APPID = '70e703682e7eeff15a6ce5ee7635f37e';
-const CITY = 'bielefeld';
-const POLL_INTERVAL_MINUTES = 30;
 
 
 @Injectable()
 export class WeatherService {
 
-  private baseUrl = 'http://api.openweathermap.org/data/2.5/'
+  private baseUrl = 'http://api.openweathermap.org/data/2.5/';
   private interval = 1000 * 60 * 30;
-
-  private weatherCurrentUrl = this.baseUrl + 'weather?q=' + CITY + '&appid=' + APPID + '&units=metric';
-  private weatherForecastUrl = this.baseUrl + 'forecast?q=' + CITY + '&appid=' + APPID + '&units=metric';
-  private pollingIntervall = 1000 * 60 * POLL_INTERVAL_MINUTES;
-
-  private widgetDataUtils: WidgetDataUtils;
-  private weatherCurrent: WeatherCurrent;
-  private weatherForecast: WeatherForecast;
-  private weatherCurrentSubject: Subject<WeatherCurrent>;
-  private weatherForecastSubject: Subject<WeatherForecast>;
   errorMessage: string;
 
   constructor(private http: Http) {
-    this.widgetDataUtils = new WidgetDataUtils(http);
-    this.weatherCurrentSubject = new Subject<WeatherCurrent>();
-    this.weatherForecastSubject = new Subject<WeatherForecast>();
-  }
-
-  getWeatherCurrentSubject(): Observable<WeatherCurrent> {
-    return this.weatherCurrentSubject;
-  }
-
-  getWeatherForecastSubject(): Observable<WeatherForecast> {
-    return this.weatherForecastSubject;
   }
 
   createWeatherCurrent(data: WeatherCurrent) {

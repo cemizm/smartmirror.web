@@ -7,9 +7,7 @@ import {SharedModule} from "./shared/shared.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {environment} from "../environments/environment";
 import {SmartMirrorModule} from "@cemizm/smartmirror-shared";
-import {WeathercurrentComponent} from "./frontend/widgets/weather/weathercurrent/weathercurrent.component";
 import {WidgetsModule} from "./frontend/widgets/widgets.module";
-import {WeatherpreviewComponent} from "./frontend/widgets/weather/weatherpreview/weatherpreview.component";
 import {NewsViewComponent} from "./frontend/widgets/news/news-view/news-view.component";
 import {CalendarViewComponent} from "./frontend/widgets/calendar/calendar-view/calendar-view.component";
 import {MailViewComponent} from "./frontend/widgets/mails/mail-view/mail-view.component";
@@ -26,8 +24,6 @@ export const AppRoutes: Routes = [
     AppComponent
   ],
   entryComponents: [
-    WeathercurrentComponent,
-    WeatherpreviewComponent,
     CalendarViewComponent,
     NewsViewComponent,
     MailViewComponent,
