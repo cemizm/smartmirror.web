@@ -1,3 +1,21 @@
-<p>
-  login works!
-</p>
+<form (submit)="login()" [formGroup]="form">
+  <div fxLayoutAlign="center center">
+    <md-card>
+      <md-card-title>Anmelden</md-card-title>
+      <md-card-content>
+        <p>
+          <md-input-container class="example-full-width">
+            <input type="email" mdInput placeholder="Email" formControlName="user">
+          </md-input-container>
+          <md-input-container class="example-full-width">
+            <input type="password" mdInput placeholder="Password" formControlName="password">
+          </md-input-container>
+        </p>
+      </md-card-content>
+      <md-card-actions>
+        <button md-raised-button type="reset">Abbrechen</button>
+        <button md-raised-button type="submit" [disabled]="!form.valid">Anmelden</button>
+      </md-card-actions>
+    </md-card>
+  </div>
+</form>

@@ -1,6 +1,6 @@
 import {ModuleWithProviders, NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {
@@ -9,28 +9,18 @@ import {
   MdCheckboxModule,
   MdGridListModule,
   MdListModule,
-  MdSlideToggleModule
+  MdSlideToggleModule,
+  MdInputModule
 } from "@angular/material";
 import {DataCacheService} from "./services/data-cache.service";
 import {MirrorSettingService} from "./services/mirror-setting.service";
-import {MirrorPipe} from './utils/mirror.pipe';
+import {MirrorPipe} from "./utils/mirror.pipe";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    HttpModule,
-    FlexLayoutModule,
-    MdButtonModule,
-    MdCheckboxModule,
-    MdCardModule,
-    MdGridListModule,
-    MdListModule,
-    MdSlideToggleModule
-  ],
-  exports: [
-    CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     FlexLayoutModule,
     MdButtonModule,
@@ -39,6 +29,21 @@ import {MirrorPipe} from './utils/mirror.pipe';
     MdGridListModule,
     MdListModule,
     MdSlideToggleModule,
+    MdInputModule,
+  ],
+  exports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule,
+    FlexLayoutModule,
+    MdButtonModule,
+    MdCheckboxModule,
+    MdCardModule,
+    MdGridListModule,
+    MdListModule,
+    MdSlideToggleModule,
+    MdInputModule,
     MirrorPipe
   ],
   declarations: [MirrorPipe]
