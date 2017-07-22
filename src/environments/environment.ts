@@ -6,4 +6,5 @@
 export const environment = {
   production: false,
   api: 'https://sm-webapi.azurewebsites.net/api',
+  socket: 'http://sm-rt.azurewebsites.net',
 };

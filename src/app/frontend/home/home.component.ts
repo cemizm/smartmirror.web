@@ -26,6 +26,11 @@ export class HomeComponent implements OnInit {
           });
         }
       });
+
+    this.ms.watchUpdates(this.mss.getId()).subscribe(mirror=> {
+      this.mirror = mirror;
+      this.ticket = null;
+    });
   }
 
 }

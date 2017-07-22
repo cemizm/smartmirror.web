@@ -14,7 +14,7 @@
   <md-grid-list cols="3" rowHeigt="10%">
     <md-grid-tile colspan="1" rowspan="1">
       <div fxLayout="column" fxLayoutAlign="stretch stretch">
-        <i class={{weatherForecastFirst.weatherList[0].weatherinformation.weatherId}} style="font-size: 200%"></i>
+        <i class={{weatherForecastFirst.weatherList[0].weatherinformation.id}} style="font-size: 200%"></i>
         <div style="font-size: 120%">{{weatherForecastFirst.weatherList[0].maininformation.temp | number: '.0-0'}} °C
         </div>
         <div style="color: grey">{{weatherForecastFirst.weatherList[0].dt | date:'HH:mm'}}</div>
@@ -22,7 +22,7 @@
     </md-grid-tile>
     <md-grid-tile colspan="1" rowspan="1">
       <div fxLayout="column" fxLayoutAlign="stretch stretch">
-        <i class={{weatherForecastFirst.weatherList[1].weatherinformation.weatherId}} style="font-size: 200%"></i>
+        <i class={{weatherForecastFirst.weatherList[1].weatherinformation.id}} style="font-size: 200%"></i>
         <div style="font-size: 120%">{{weatherForecastFirst.weatherList[1].maininformation.temp | number: '.0-0'}} °C
         </div>
         <div style="color: grey">{{weatherForecastFirst.weatherList[1].dt | date:'HH:mm'}}</div>
@@ -30,7 +30,7 @@
     </md-grid-tile>
     <md-grid-tile colspan="1" rowspan="1">
       <div fxLayout="column" fxLayoutAlign="stretch stretch">
-        <i class={{weatherForecastFirst.weatherList[2].weatherinformation.weatherId}} style="font-size: 200%"></i>
+        <i class={{weatherForecastFirst.weatherList[2].weatherinformation.id}} style="font-size: 200%"></i>
         <div style="font-size: 120%">{{weatherForecastFirst.weatherList[2].maininformation.temp | number: '.0-0'}} °C
         </div>
         <div style="color: grey">{{weatherForecastFirst.weatherList[2].dt | date:'HH:mm'}}</div>
@@ -43,7 +43,7 @@
       <!--input type="date" ng-model="myDate" ng-init="myDate - 22000 = "-->
       <div fxLayout="row" fxLayoutAlign="stretch stretch">
         <div style="color: grey">{{weatherItem.dt | date:'dd.MM.'}}</div>
-        <i class={{weatherItem.weatherinformation.weatherId}} style="font-size: 200%"></i>
+        <i class={{weatherItem.weatherinformation.id}} style="font-size: 200%"></i>
         <div style="font-size: 120%">{{weatherItem.maininformation.temp | number: '.0-0'}} °C</div>
       </div>
     </md-list-item>
