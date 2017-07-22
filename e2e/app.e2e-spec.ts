@@ -11,4 +11,8 @@ describe('smart-mirror App', () => {
     page.navigateTo();
     expect(page.getParagraphText()).toEqual('app works!');
   });
+  it('shoulld display right container', ()=>{
+    page.navigateTo();
+    expect(page.getRightContainer()).toEqual('');
+  });
 });
