@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="stretch stretch">
+<div [class]="theme" fxLayout="row" fxLayoutAlign="stretch stretch">
   <div fxLayout="column" fxFlex="25%" fxLayoutGap="20px" *ngIf="mirror">
     <app-today></app-today>
     <div *ngFor="let widget of mirror | mirrorPipe:1">
@@ -14,6 +14,11 @@
         </md-card-content>
       </md-card>
     </div>
+  </div>
+  <div fxFlex fxLayoutAlign="center end">
+    <md-slide-toggle (change)="switchTheme()">
+      <div style="color:white">tv theme</div>
+    </md-slide-toggle>
   </div>
   <div fxLayout="column" fxFlex="25%" fxLayoutGap="20px" *ngIf="mirror">
     <div *ngFor="let widget of mirror | mirrorPipe:2">

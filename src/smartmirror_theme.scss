@@ -10,19 +10,18 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
 $dark-primary: mat-palette($mat-indigo);
-$dark-accent:  mat-palette($mat-pink, A200, A100, A400);
-
+$dark-accent: mat-palette($mat-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$dark-warn:    mat-palette($mat-red);
+$dark-warn: mat-palette($mat-red);
 
 $smartmirror-dark-theme-background: (
   status-bar: black,
-  app-bar:    map_get($mat-grey, 900),
+  app-bar: map_get($mat-grey, 900),
   background: rgba(black, 1.00),
-  hover:      rgba(white, 0.04), // TODO(kara): check style with Material Design UX
-  card:       rgba(black, 1.00),
-  dialog:     map_get($mat-grey, 800),
+  hover: rgba(white, 0.04), // TODO(kara): check style with Material Design UX
+  card: rgba(black, 1.00),
+  dialog: map_get($mat-grey, 800),
   disabled-button: $white-12-opacity,
   raised-button: map-get($mat-grey, 800),
   focused-button: $white-6-opacity,
@@ -32,37 +31,49 @@ $smartmirror-dark-theme-background: (
 );
 
 $smartmirror-dark-theme-foreground: (
-  base:              white,
-  divider:           $white-87-opacity,
-  dividers:          $white-87-opacity,
-  disabled:          rgba(white, 0.3),
-  disabled-button:   rgba(white, 0.3),
-  disabled-text:     rgba(white, 0.3),
-  hint-text:         rgba(white, 0.3),
-  secondary-text:    rgba(white, 0.7),
-  icon:              white,
-  icons:             white,
-  text:              white,
-  slider-off:        rgba(white, 0.3),
+  base: white,
+  divider: $white-87-opacity,
+  dividers: $white-87-opacity,
+  disabled: rgba(white, 0.3),
+  disabled-button: rgba(white, 0.3),
+  disabled-text: rgba(white, 0.3),
+  hint-text: rgba(white, 0.3),
+  secondary-text: rgba(white, 0.7),
+  icon: white,
+  icons: white,
+  text: white,
+  slider-off: rgba(white, 0.3),
   slider-off-active: rgba(white, 0.3),
 );
 
-@function mat-dark-theme($primary, $accent, $warn: mat-palette($mat-red)) {
+@function mat-dark-theme($primary, $accent, $foreground, $background, $warn: mat-palette($mat-red)) {
   @return (
     primary: $primary,
     accent: $accent,
     warn: $warn,
     is-dark: true,
-    foreground: $mat-dark-theme-foreground,
-    background: $mat-dark-theme-background,
+    foreground: $foreground,
+    background: $background,
   );
 }
 
-
 // Create the theme object (a Sass map containing all of the palettes).
-$smartmirror-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+$smartmirror-theme: mat-dark-theme($dark-primary, $dark-accent,
+  $smartmirror-dark-theme-foreground, $smartmirror-dark-theme-background, $dark-warn);
+
+$tv-theme: mat-dark-theme($dark-primary, $dark-accent,
+  $mat-dark-theme-foreground, $mat-dark-theme-background, $dark-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
+
 @include angular-material-theme($smartmirror-theme);
+
+.tv-theme {
+  @include angular-material-theme($tv-theme);
+}
+
+.mat-card {
+  box-shadow: 0px 0px 0px 0px rgba(white, 0.87), 0px 0px 20px 4px rgba(white, 0.5), 0px 0px 0px 0 rgba(white, 0.87) !important;
+}

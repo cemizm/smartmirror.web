@@ -11,8 +11,13 @@ export class HomeComponent implements OnInit {
 
   private ticket: Ticket;
   private mirror: Mirror;
+  private theme = "smartmirror-theme";
 
   constructor(private ms: MirrorService, private mss: MirrorSettingService, private ts: TicketService) {
+  }
+
+  switchTheme() {
+    (this.theme === "smartmirror-theme") ? this.theme = "tv-theme" : this.theme = "smartmirror-theme";
   }
 
   ngOnInit() {
@@ -27,7 +32,7 @@ export class HomeComponent implements OnInit {
         }
       });
 
-    this.ms.watchUpdates(this.mss.getId()).subscribe(mirror=> {
+    this.ms.watchUpdates(this.mss.getId()).subscribe(mirror => {
       this.mirror = mirror;
       this.ticket = null;
     });

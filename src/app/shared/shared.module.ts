@@ -3,11 +3,17 @@ import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {FlexLayoutModule} from "@angular/flex-layout";
-import {MdButtonModule, MdCardModule, MdCheckboxModule, MdGridListModule, MdListModule} from "@angular/material";
+import {
+  MdButtonModule,
+  MdCardModule,
+  MdCheckboxModule,
+  MdGridListModule,
+  MdListModule,
+  MdSlideToggleModule
+} from "@angular/material";
 import {DataCacheService} from "./services/data-cache.service";
 import {MirrorSettingService} from "./services/mirror-setting.service";
-import { MirrorPipe } from './utils/mirror.pipe';
-import {WidgetDataUtils} from '../frontend/widgets/utils/widget.data.utils';
+import {MirrorPipe} from './utils/mirror.pipe';
 
 @NgModule({
   imports: [
@@ -19,7 +25,8 @@ import {WidgetDataUtils} from '../frontend/widgets/utils/widget.data.utils';
     MdCheckboxModule,
     MdCardModule,
     MdGridListModule,
-    MdListModule
+    MdListModule,
+    MdSlideToggleModule
   ],
   exports: [
     CommonModule,
@@ -31,6 +38,7 @@ import {WidgetDataUtils} from '../frontend/widgets/utils/widget.data.utils';
     MdCardModule,
     MdGridListModule,
     MdListModule,
+    MdSlideToggleModule,
     MirrorPipe
   ],
   declarations: [MirrorPipe]
