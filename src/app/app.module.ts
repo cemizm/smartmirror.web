@@ -6,15 +6,13 @@ import {SharedModule} from "./shared/shared.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {environment} from "../environments/environment";
 import {SmartMirrorModule} from "@cemizm/smartmirror-shared";
-import {WidgetsModule} from "./frontend/widgets/widgets.module";
-import {NewsViewComponent} from "./frontend/widgets/news/news-view/news-view.component";
-import {CalendarViewComponent} from "./frontend/widgets/calendar/calendar-view/calendar-view.component";
-import {MailViewComponent} from "./frontend/widgets/mails/mail-view/mail-view.component";
-import {NoteViewComponent} from "./frontend/widgets/note/note-view/note-view.component";
+import {FrontendModule} from "./frontend/frontend.module";
+import {OAuthModule} from "./oauth/oauth.module";
 
 export const AppRoutes: Routes = [
   {path: 'frontend', loadChildren: './frontend/frontend.module#FrontendModule'},
   {path: 'admin', loadChildren: './admin/admin.module#AdminModule'},
+  {path: 'auth', loadChildren: './oauth/oauth.module#OAuthModule'},
   {path: '', redirectTo: '/frontend', pathMatch: 'full'},
 ];
 
@@ -22,19 +20,14 @@ export const AppRoutes: Routes = [
   declarations: [
     AppComponent
   ],
-  entryComponents: [
-    CalendarViewComponent,
-    NewsViewComponent,
-    MailViewComponent,
-    NoteViewComponent],
+  entryComponents: [],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FrontendModule,
+    OAuthModule,
     RouterModule.forRoot(AppRoutes),
-    WidgetsModule,
-
     SmartMirrorModule.forRoot({apiUrl: environment.api, rtUrl: environment.socket}),
-
     SharedModule.forRoot()
   ],
   providers: [],
