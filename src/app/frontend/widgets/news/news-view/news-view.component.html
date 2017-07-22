@@ -1,5 +1,8 @@
 <md-card class="news">
   <h3>News</h3>
+  <p *ngIf="!feedRss">
+    Keine News
+  </p>
   <div *ngIf="feedRss">
     <h5 md-line>{{feedRss.feed.title}}</h5>
     <div fxLayout="column" fxLayoutAlign="stretch stretch" *ngFor="let items of feedRss.items">

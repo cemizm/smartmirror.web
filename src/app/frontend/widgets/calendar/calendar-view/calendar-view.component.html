@@ -1,5 +1,8 @@
 <md-card class="calender">
   <h3>Kalender</h3>
+  <p *ngIf="!calEventList">
+    Keine Termine
+  </p>
   <md-list *ngIf="calEventList">
     <div *ngFor="let item of calEventList | slice:0:setting.maxCount">
       <md-list-item>

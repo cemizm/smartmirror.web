@@ -1,5 +1,8 @@
 <md-card class="mail">
   <h3>Mails</h3>
+  <p *ngIf="!mailList">
+    Keine Mails
+  </p>
   <md-list *ngIf="mailList">
     <div *ngFor="let item of mailList | slice:0:setting.maxCount">
       <md-list-item>
