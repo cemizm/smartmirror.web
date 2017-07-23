@@ -6,12 +6,12 @@
   <md-list *ngIf="calEventList">
     <div *ngFor="let item of calEventList | slice:0:setting.maxCount">
       <md-list-item>
-        <h5 md-line>{{item.start.dateTime | date:'dd.MM.'}}</h5>
-        <h5 md-line style="color: grey">{{item.start.dateTime | date:'HH:mm'}}</h5>
-        <h6 md-line> {{item.summary}}</h6>
-        <md-divider></md-divider>
+        <p style="color:#808080;font-size:120%" md-line>
+          {{item.start.dateTime | date:'dd.MM.'}}
+        </p>
+        <p md-line>
+          {{item.start.dateTime | date:'HH:mm'}} {{item.summary}}</p>
       </md-list-item>
-      <md-divider></md-divider>
     </div>
   </md-list>
 </md-card>
