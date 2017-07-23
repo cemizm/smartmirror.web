@@ -77,3 +77,11 @@ $tv-theme: mat-dark-theme($dark-primary, $dark-accent,
 .mat-card {
   box-shadow: 0px 0px 0px 0px rgba(white, 0.87), 0px 0px 20px 4px rgba(white, 0.5), 0px 0px 0px 0 rgba(white, 0.87) !important;
 }
+
+.fa {
+  margin-right: 5px;
+}
+
+md-divider {
+  border-color:grey !important;
+}
