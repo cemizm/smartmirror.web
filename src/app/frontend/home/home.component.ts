@@ -36,6 +36,17 @@ export class HomeComponent implements OnInit {
       this.mirror = mirror;
       this.ticket = null;
     });
+
+    this.ms.watchControlRequest(this.mss.getId()).subscribe(control => {
+      switch (control.action) {
+        case "TurnOnRequest":
+          this.theme = "tv-theme";
+          break;
+        case "TurnOffRequest":
+          this.theme = "smartmirror-theme";
+          break;
+      }
+    });
   }
 
 }

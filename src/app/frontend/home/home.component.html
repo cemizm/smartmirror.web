@@ -4,18 +4,18 @@
     <div *ngFor="let widget of mirror | mirrorPipe:1">
       <app-widget-container [widget]="widget"></app-widget-container>
     </div>
-    </div>
-    <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
-      <md-card *ngIf="ticket">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data={{ticket?.number}}">
-        <md-card-content fxLayoutAlign="center center" style="font-size: 250%; margin: 40px">
-          {{ticket?.number}}
-        </md-card-content>
-      </md-card>
-      <md-slide-toggle (change)="switchTheme()">
-        <div style="color:white">tv theme</div>
-      </md-slide-toggle>
-    </div>
+  </div>
+  <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <md-card *ngIf="ticket">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data={{ticket?.number}}">
+      <md-card-content fxLayoutAlign="center center" style="font-size: 250%; margin: 40px">
+        {{ticket?.number}}
+      </md-card-content>
+    </md-card>
+    <md-slide-toggle (change)="switchTheme()" [checked]="theme === 'tv-theme'">
+      <div style="color:white">tv theme</div>
+    </md-slide-toggle>
+  </div>
   <div fxLayout="column" fxFlex="25%" fxLayoutGap="20px" *ngIf="mirror">
     <div *ngFor="let widget of mirror | mirrorPipe:2">
       <app-widget-container [widget]="widget"></app-widget-container>
