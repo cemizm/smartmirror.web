@@ -4,7 +4,8 @@
   </p>
   <div fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="5px" *ngIf="events">
     <div *ngFor="let group of events">
-      <div style="background: #222222;margin:5px -6px;padding:3px 6px; font-size:80%">{{group.day | date:'EEEE dd.MM'}}
+      <div style="background: #222222;margin:5px -6px;padding:3px 6px; font-size:80%">{{group.day | amDateFormat:'dddd
+        DD.MM'}}
       </div>
       <div fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="10px">
         <div *ngFor="let event of group.events" fxLayout="row" fxLayoutAlign="stretch start" fxLayoutGap="15px"
