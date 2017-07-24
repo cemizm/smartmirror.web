@@ -1,13 +1,12 @@
 <md-card class="task">
-  <h3><i class="fa fa-tasks"></i> Aufgaben</h3>
   <p *ngIf="!taskList">
     Keine Aufgaben
   </p>
-  <md-list *ngIf="taskList">
-    <div *ngFor="let item of taskList | slice:0:setting.maxCount">
-      <md-list-item>
-        <h5 md-line>&bull; {{item.title}}</h5>
-      </md-list-item>
+  <div *ngIf="taskList">
+    <div *ngFor="let item of taskList" style="margin:3px">
+      <i class="fa fa-circle-o" *ngIf="item.status !== 'completed'"></i>
+      <i class="fa fa-check-circle-o" *ngIf="item.status === 'completed'"></i>
+      {{item.title}}
     </div>
-  </md-list>
+  </div>
 </md-card>
