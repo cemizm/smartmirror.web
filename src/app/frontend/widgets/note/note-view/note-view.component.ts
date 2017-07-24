@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from "@angular/core";
 import {Task, TaskService, TaskSetting} from "@cemizm/smartmirror-shared";
 import {Observable} from "rxjs/Observable";
 
-const interval = 1000 * 60 * 1 / 2;
+const interval = 1000 * 60 * 1 / 4;
 
 @Component({
   selector: 'app-note-view',

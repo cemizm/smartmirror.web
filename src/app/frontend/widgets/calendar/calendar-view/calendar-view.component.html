@@ -23,16 +23,4 @@
       </div>
     </div>
   </div>
-
-  <md-list>
-    <div *ngFor="let item of calEventList | slice:0:setting.maxCount">
-      <md-list-item>
-        <p style="color:#808080;font-size:120%" md-line>
-          {{item.start.dateTime | date:'dd.MM.'}}
-        </p>
-        <p md-line>
-          {{item.start.dateTime | date:'HH:mm'}} {{item.summary}}</p>
-      </md-list-item>
-    </div>
-  </md-list>
 </md-card>

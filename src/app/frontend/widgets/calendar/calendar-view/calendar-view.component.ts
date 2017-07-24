@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from "@angular/core";
 import {CalendarSettings, Event, EventsService} from "@cemizm/smartmirror-shared";
 import {Observable} from "rxjs";
 
-const UPDATE_INTERVAL = 1000 * 60 * 0.2;
+const UPDATE_INTERVAL = 1000 * 60 * 1 / 12;
 
 interface GroupedEvent {
   day: Date;
