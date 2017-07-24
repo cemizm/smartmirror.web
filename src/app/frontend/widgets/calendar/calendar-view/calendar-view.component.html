@@ -1,9 +1,30 @@
 <md-card class="calender">
-  <h3><i class="fa fa-calendar-o"></i> Kalender</h3>
-  <p *ngIf="!calEventList">
+  <p *ngIf="!events">
     Keine Termine
   </p>
-  <md-list *ngIf="calEventList">
+  <div fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="5px" *ngIf="events">
+    <div *ngFor="let group of events">
+      <div style="background: #222222;margin:5px -6px;padding:3px 6px; font-size:80%">{{group.day | date:'EEEE dd.MM'}}
+      </div>
+      <div fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="10px">
+        <div *ngFor="let event of group.events" fxLayout="row" fxLayoutAlign="stretch start" fxLayoutGap="15px"
+             style="min-height:30px;">
+          <div fxFlex="80px" style="font-size: 80%; text-align: right">
+            <span *ngIf="event.start.dateTime">
+              {{event.start.dateTime | date:'HH:mm'}}<br>
+              <span style="color: gray">{{event.end.dateTime | date:'HH:mm'}}</span>
+              </span>
+            <span *ngIf="!event.start.dateTime">
+              Ganztägig
+            </span>
+          </div>
+          <div>{{event.summary}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <md-list>
     <div *ngFor="let item of calEventList | slice:0:setting.maxCount">
       <md-list-item>
         <p style="color:#808080;font-size:120%" md-line>
