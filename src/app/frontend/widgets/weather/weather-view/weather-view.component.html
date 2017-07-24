@@ -12,36 +12,19 @@
       </md-grid-tile>
     </md-grid-list>
 
-    <md-grid-list cols="3">
-      <md-grid-tile colspan="1" rowspan="1">
-        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="3px">
-          <div style="color: grey;font-size:80%;">{{weatherForecastFirst.weatherList[0].dt | date:'HH:mm'}}</div>
-          <i class={{weatherForecastFirst.weatherList[0].weatherinformation.id}} style="font-size: 250%"></i>
-          <div>{{weatherForecastFirst.weatherList[0].maininformation.temp | number: '.0-0'}} °C
-          </div>
+    <div fxLayout="row" fxLayoutAlign="stretch stretch" fxLayoutGap="5px" style="margin-top: 10px">
+      <div fxLayout="column" fxLayoutAlign="stretch center" fxFlex
+           *ngFor="let weatherItem of weatherForecastFirst.weatherList">
+        <div style="color: grey;font-size:80%;margin-bottom: 3px">{{weatherItem.dt | date:'HH:mm'}}</div>
+        <i class={{weatherItem.weatherinformation.id}} style="font-size: 250%"></i>
+        <div>{{weatherItem.maininformation.temp | number: '.0-0'}} °C
         </div>
-      </md-grid-tile>
-      <md-grid-tile colspan="1" rowspan="1">
-        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="3px">
-          <div style="color: grey;font-size:80%;">{{weatherForecastFirst.weatherList[1].dt | date:'HH:mm'}}</div>
-          <i class={{weatherForecastFirst.weatherList[1].weatherinformation.id}} style="font-size: 250%"></i>
-          <div>{{weatherForecastFirst.weatherList[1].maininformation.temp | number: '.0-0'}} °C
-          </div>
-        </div>
-      </md-grid-tile>
-      <md-grid-tile colspan="1" rowspan="1">
-        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="3px">
-          <div style="color: grey;font-size:80%;">{{weatherForecastFirst.weatherList[2].dt | date:'HH:mm'}}</div>
-          <i class={{weatherForecastFirst.weatherList[2].weatherinformation.id}} style="font-size: 250%"></i>
-          <div>{{weatherForecastFirst.weatherList[2].maininformation.temp | number: '.0-0'}} °C
-          </div>
-        </div>
-      </md-grid-tile>
-    </md-grid-list>
+      </div>
+    </div>
 
     <div fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="5px" style="margin-top: 10px">
       <div fxLayout="row" fxLayoutAlign="stretch stretch" *ngFor="let weatherItem of weatherForecast.weatherList">
-        <div style="color: grey; text-align: left" fxFlex>{{weatherItem.dt | date:'dd.MM.'}}</div>
+        <div style="color: grey; text-align: left" fxFlex>{{weatherItem.dt | date:'EEEE'}}</div>
         <i class={{weatherItem.weatherinformation.id}} style="font-size: 150%; text-align: center" fxFlex></i>
         <div class="md-secondary" style="text-align: right" fxFlex>{{weatherItem.maininformation.temp | number: '.0-0'}}
           °C
