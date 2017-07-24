@@ -12,7 +12,7 @@
     <div fxLayout="row" fxLayoutAlign="stretch stretch" fxLayoutGap="5px">
       <div fxLayout="column" fxLayoutAlign="stretch center" fxFlex
            *ngFor="let weatherItem of weatherForecastFirst.weatherList">
-        <div style="color: grey;font-size:80%;margin-bottom: 3px">{{weatherItem.dt | date:'HH:mm'}}</div>
+        <div style="color: grey;font-size:80%;margin-bottom: 3px">{{weatherItem.dt | date:'HH'}} Uhr</div>
         <i class={{weatherItem.weatherinformation.id}} style="font-size: 250%"></i>
         <div>{{weatherItem.maininformation.temp | number: '.0-0'}} °C
         </div>
