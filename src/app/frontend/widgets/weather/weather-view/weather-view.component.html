@@ -1,53 +1,53 @@
 <md-card class="weather-view">
   <div *ngIf="weatherForecast && weatherForecastFirst">
-  <md-grid-list cols="3" rowHeight="80px" *ngIf="weatherCurrent">
-    <md-grid-tile colspan=3 rowspan=1 style="font-size: 200%">
-      {{weatherCurrent.name}}
-    </md-grid-tile>
-    <md-grid-tile colspan=1 rowspan=1>
-      <i class={{weatherCurrent.weather[0].id}} style="font-size: 400%"></i>
-    </md-grid-tile>
-    <md-grid-tile colspan=2 rowspan=1 style="font-size: 200%">
-      {{weatherCurrent.main.temp | number: '.0-0'}} °C
-    </md-grid-tile>
-  </md-grid-list>
+    <md-grid-list cols="3" rowHeight="80px" *ngIf="weatherCurrent">
+      <md-grid-tile colspan=3 rowspan=1 style="font-size: 200%">
+        {{weatherCurrent.name}}
+      </md-grid-tile>
+      <md-grid-tile colspan=1 rowspan=1>
+        <i class={{weatherCurrent.weather[0].id}} style="font-size: 400%"></i>
+      </md-grid-tile>
+      <md-grid-tile colspan=2 rowspan=1 style="font-size: 200%">
+        {{weatherCurrent.main.temp | number: '.0-0'}} °C
+      </md-grid-tile>
+    </md-grid-list>
 
-  <md-grid-list cols="3">
-    <md-grid-tile colspan="1" rowspan="1">
-      <div fxLayout="column" fxLayoutAlign="stretch stretch">
-        <i class={{weatherForecastFirst.weatherList[0].weatherinformation.id}} style="font-size: 200%"></i>
-        <div style="font-size: 120%">{{weatherForecastFirst.weatherList[0].maininformation.temp | number: '.0-0'}} °C
+    <md-grid-list cols="3">
+      <md-grid-tile colspan="1" rowspan="1">
+        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="3px">
+          <div style="color: grey;font-size:80%;">{{weatherForecastFirst.weatherList[0].dt | date:'HH:mm'}}</div>
+          <i class={{weatherForecastFirst.weatherList[0].weatherinformation.id}} style="font-size: 250%"></i>
+          <div>{{weatherForecastFirst.weatherList[0].maininformation.temp | number: '.0-0'}} °C
+          </div>
         </div>
-        <div style="color: grey;font-size:120%;">{{weatherForecastFirst.weatherList[0].dt | date:'HH:mm'}}</div>
-      </div>
-    </md-grid-tile>
-    <md-grid-tile colspan="1" rowspan="1">
-      <div fxLayout="column" fxLayoutAlign="stretch stretch">
-        <i class={{weatherForecastFirst.weatherList[1].weatherinformation.id}} style="font-size: 200%"></i>
-        <div style="font-size: 120%">{{weatherForecastFirst.weatherList[1].maininformation.temp | number: '.0-0'}} °C
+      </md-grid-tile>
+      <md-grid-tile colspan="1" rowspan="1">
+        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="3px">
+          <div style="color: grey;font-size:80%;">{{weatherForecastFirst.weatherList[1].dt | date:'HH:mm'}}</div>
+          <i class={{weatherForecastFirst.weatherList[1].weatherinformation.id}} style="font-size: 250%"></i>
+          <div>{{weatherForecastFirst.weatherList[1].maininformation.temp | number: '.0-0'}} °C
+          </div>
         </div>
-        <div style="color: grey;font-size:120%;">{{weatherForecastFirst.weatherList[1].dt | date:'HH:mm'}}</div>
-      </div>
-    </md-grid-tile>
-    <md-grid-tile colspan="1" rowspan="1">
-      <div fxLayout="column" fxLayoutAlign="stretch stretch">
-        <i class={{weatherForecastFirst.weatherList[2].weatherinformation.id}} style="font-size: 200%"></i>
-        <div style="font-size: 120%">{{weatherForecastFirst.weatherList[2].maininformation.temp | number: '.0-0'}} °C
+      </md-grid-tile>
+      <md-grid-tile colspan="1" rowspan="1">
+        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="3px">
+          <div style="color: grey;font-size:80%;">{{weatherForecastFirst.weatherList[2].dt | date:'HH:mm'}}</div>
+          <i class={{weatherForecastFirst.weatherList[2].weatherinformation.id}} style="font-size: 250%"></i>
+          <div>{{weatherForecastFirst.weatherList[2].maininformation.temp | number: '.0-0'}} °C
+          </div>
         </div>
-        <div style="color: grey;font-size:120%;">{{weatherForecastFirst.weatherList[2].dt | date:'HH:mm'}}</div>
-      </div>
-    </md-grid-tile>
-  </md-grid-list>
-  <md-divider></md-divider>
-  <md-list>
-    <md-list-item *ngFor="let weatherItem of weatherForecast.weatherList">
-      <div style="color: grey;font-size:120%;">{{weatherItem.dt | date:'dd.MM.'}}</div>
-      <i class={{weatherItem.weatherinformation.id}} style="font-size: 200%"></i>
-      <div class="md-secondary" style="font-size: 120%">{{weatherItem.maininformation.temp | number: '.0-0'}} °C</div>
-    </md-list-item>
-  </md-list>
-  <!--p style="font-size: 80% ;color: grey">
-    letztes Update: {{weatherCurrent.dt | date:'dd.MM. HH:mm'}}
-  </p-->
+      </md-grid-tile>
+    </md-grid-list>
+
+    <md-list>
+      <md-list-item *ngFor="let weatherItem of weatherForecast.weatherList">
+        <div style="color: grey;font-size:120%;">{{weatherItem.dt | date:'dd.MM.'}}</div>
+        <i class={{weatherItem.weatherinformation.id}} style="font-size: 200%"></i>
+        <div class="md-secondary" style="font-size: 120%">{{weatherItem.maininformation.temp | number: '.0-0'}} °C</div>
+      </md-list-item>
+    </md-list>
+    <!--p style="font-size: 80% ;color: grey">
+      letztes Update: {{weatherCurrent.dt | date:'dd.MM. HH:mm'}}
+    </p-->
   </div>
 </md-card>
