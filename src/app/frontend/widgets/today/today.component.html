@@ -1,15 +1,11 @@
 <md-card>
-  <md-grid-list cols="3" rowHeight="60px">
-    <md-grid-tile colspan=3 style="font-size: 120%">
-      {{date.toLocaleString('de-de', { weekday: 'long' })}}
-      {{date | date: 'dd.'}}
-      {{date.toLocaleString('de-de', { month: 'long' })}}
-    </md-grid-tile>
-    <md-grid-tile colspan=3 style="font-size: 300%">
-      {{date | date: 'HH:mm'}}
-      <div style="font-size: 50%; color: grey">
-        {{date | date: 'ss'}}
-      </div>
-    </md-grid-tile>
-  </md-grid-list>
+  <div fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="10px">
+    <div style="font-size: 300%; text-align: right" fxFlex>
+      {{date | date: 'HH:mm'}}<span style="font-size: 50%; color: grey; margin-left: 2px">{{date | date: 'ss'}}</span>
+    </div>
+    <div style="font-size: 120%; text-align: right" fxFlex="30%">
+      {{date.toLocaleString('de-de', { weekday: 'long' })}}<br>
+      <span style="color:gray">{{date | date: 'dd.'}} {{date.toLocaleString('de-de', { month: 'long' })}}</span>
+    </div>
+  </div>
 </md-card>
