@@ -12,9 +12,6 @@
         {{ticket?.number}}
       </md-card-content>
     </md-card>
-    <md-slide-toggle (change)="switchTheme()" [checked]="theme === 'tv-theme'">
-      <div style="color:white">tv theme</div>
-    </md-slide-toggle>
   </div>
   <div fxLayout="column" fxFlex="25%" fxLayoutGap="20px" *ngIf="mirror">
     <div *ngFor="let widget of mirror | mirrorPipe:2">

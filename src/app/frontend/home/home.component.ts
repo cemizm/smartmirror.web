@@ -15,11 +15,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private ms: MirrorService, private mss: MirrorSettingService, private ts: TicketService) {
   }
-
-  switchTheme() {
-    (this.theme === "smartmirror-theme") ? this.theme = "tv-theme" : this.theme = "smartmirror-theme";
-  }
-
+  
   ngOnInit() {
     this.ms.getById(this.mss.getId()).subscribe(mirror => {
         this.mirror = mirror;
