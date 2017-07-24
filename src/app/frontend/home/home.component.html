@@ -6,9 +6,9 @@
     </div>
   </div>
   <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
-    <md-card *ngIf="ticket">
+    <md-card class="ticketCard" *ngIf="ticket">
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data={{ticket?.number}}">
-      <md-card-content fxLayoutAlign="center center" style="font-size: 250%; margin: 40px">
+      <md-card-content class="ticketNumber" fxLayoutAlign="center center" style="font-size: 250%; margin: 40px">
         {{ticket?.number}}
       </md-card-content>
     </md-card>

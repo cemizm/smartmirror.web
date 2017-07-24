@@ -5,6 +5,18 @@ export class SmartMirrorPage {
     return browser.get('/');
   }
 
+  getTitle() {
+    return browser.getTitle();
+  }
+
+  getTicketCard() {
+    return element(by.css('.ticketCard')).getText();
+  }
+
+  getTicketNumber() {
+    return element(by.css('.ticketNumber')).getText();
+  }
+
   getLeftContainer() {
     return element(by.css('app-home > div > div:first-child')).getText();
   }

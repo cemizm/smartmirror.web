@@ -10,8 +10,7 @@ import {
   MdGridListModule,
   MdListModule,
   MdSlideToggleModule,
-  MdInputModule,
-  MdIconModule
+  MdInputModule
 } from "@angular/material";
 import {DataCacheService} from "./services/data-cache.service";
 import {MirrorSettingService} from "./services/mirror-setting.service";

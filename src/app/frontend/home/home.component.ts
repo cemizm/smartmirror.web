@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, NgZone, OnInit} from "@angular/core";
 import {Mirror, MirrorService, Ticket, TicketService} from "@cemizm/smartmirror-shared";
 import {MirrorSettingService} from "../../shared/services/mirror-setting.service";
 
@@ -13,9 +13,9 @@ export class HomeComponent implements OnInit {
   private mirror: Mirror;
   private theme = "smartmirror-theme";
 
-  constructor(private ms: MirrorService, private mss: MirrorSettingService, private ts: TicketService) {
+  constructor(private ms: MirrorService, private mss: MirrorSettingService, private ts: TicketService, private ngZone: NgZone) {
   }
-  
+
   ngOnInit() {
     this.ms.getById(this.mss.getId()).subscribe(mirror => {
         this.mirror = mirror;
@@ -28,9 +28,13 @@ export class HomeComponent implements OnInit {
         }
       });
 
-    this.ms.watchUpdates(this.mss.getId()).subscribe(mirror => {
-      this.mirror = mirror;
-      this.ticket = null;
+    this.ngZone.runOutsideAngular(() => {
+      this.ms.watchUpdates(this.mss.getId()).subscribe(mirror => {
+        this.ngZone.run(() => {
+          this.mirror = mirror;
+          this.ticket = null;
+        });
+      });
     });
 
     this.ms.watchControlRequest(this.mss.getId()).subscribe(control => {
