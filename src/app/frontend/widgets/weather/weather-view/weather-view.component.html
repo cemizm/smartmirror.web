@@ -1,5 +1,5 @@
 <md-card class="weather-view">
-  <div *ngIf="weatherForecast && weatherForecastFirst">
+  <div *ngIf="weatherForecast && weatherForecastFirst" fxLayout="column" fxLayoutAlign="stretch stretch">
     <md-grid-list cols="3" rowHeight="80px" *ngIf="weatherCurrent">
       <md-grid-tile colspan=3 rowspan=1 style="font-size: 200%">
         {{weatherCurrent.name}}
@@ -39,15 +39,14 @@
       </md-grid-tile>
     </md-grid-list>
 
-    <md-list>
-      <md-list-item *ngFor="let weatherItem of weatherForecast.weatherList">
-        <div style="color: grey;font-size:120%;">{{weatherItem.dt | date:'dd.MM.'}}</div>
-        <i class={{weatherItem.weatherinformation.id}} style="font-size: 200%"></i>
-        <div class="md-secondary" style="font-size: 120%">{{weatherItem.maininformation.temp | number: '.0-0'}} °C</div>
-      </md-list-item>
-    </md-list>
-    <!--p style="font-size: 80% ;color: grey">
-      letztes Update: {{weatherCurrent.dt | date:'dd.MM. HH:mm'}}
-    </p-->
+    <div fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="5px" style="margin-top: 10px">
+      <div fxLayout="row" fxLayoutAlign="stretch stretch" *ngFor="let weatherItem of weatherForecast.weatherList">
+        <div style="color: grey; text-align: left" fxFlex>{{weatherItem.dt | date:'dd.MM.'}}</div>
+        <i class={{weatherItem.weatherinformation.id}} style="font-size: 150%; text-align: center" fxFlex></i>
+        <div class="md-secondary" style="text-align: right" fxFlex>{{weatherItem.maininformation.temp | number: '.0-0'}}
+          °C
+        </div>
+      </div>
+    </div>
   </div>
 </md-card>
