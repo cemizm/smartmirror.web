@@ -21,7 +21,7 @@
 
     <div fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="5px" style="margin-top: 20px">
       <div fxLayout="row" fxLayoutAlign="stretch stretch" *ngFor="let weatherItem of weatherForecast.weatherList">
-        <div style="color: grey; text-align: left" fxFlex>{{weatherItem.dt | date:'EEEE'}}</div>
+        <div style="color: grey; text-align: left" fxFlex>{{weatherItem.dt | amDateFormat:'dddd'}}</div>
         <i class={{weatherItem.weatherinformation.id}} style="font-size: 150%; text-align: center" fxFlex></i>
         <div class="md-secondary" style="text-align: right" fxFlex>{{weatherItem.maininformation.temp | number: '.0-0'}}
           °C
