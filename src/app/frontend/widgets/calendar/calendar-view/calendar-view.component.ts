@@ -2,7 +2,12 @@ import {Component, Input, OnInit} from "@angular/core";
 import {CalendarSettings, Event, EventsService} from "@cemizm/smartmirror-shared";
 import {Observable} from "rxjs";
 
-const UPDATE_INTERVAL = 1000 * 60 * 0.5;
+const UPDATE_INTERVAL = 1000 * 60 * 0.2;
+
+interface GroupedEvent {
+  day: Date;
+  events: Event[];
+}
 
 @Component({
   selector: 'app-calendar-view',
@@ -10,7 +15,7 @@ const UPDATE_INTERVAL = 1000 * 60 * 0.5;
   styleUrls: ['./calendar-view.component.scss']
 })
 export class CalendarViewComponent implements OnInit {
-  private calEventList: Array<Event>;
+  private events: Array<GroupedEvent>;
 
   @Input() setting: CalendarSettings | CalendarSettings;
 
@@ -28,7 +33,40 @@ export class CalendarViewComponent implements OnInit {
         singleEvents: true,
         timeMin: new Date().toISOString()
       }).subscribe(events => {
-      this.calEventList = events;
+
+      events = events.slice(0, this.setting.maxCount);
+
+      this.events = new Array<GroupedEvent>();
+
+      let keys = {};
+
+      let group: GroupedEvent = null;
+      for (const event of events) {
+        let date: any = event.start.date;
+        if (!date) {
+          date = event.start.dateTime as any;
+        }
+
+        if (!date)
+          continue;
+
+        date = new Date(date);
+
+        let key = date.getDate().valueOf();
+
+        group = keys[key];
+
+        if (!group) {
+          group = {
+            day: date,
+            events: new Array<Event>()
+          }
+          keys[key] = group;
+          this.events.push(group);
+        }
+
+        group.events.push(event);
+      }
     });
   }
 }
