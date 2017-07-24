@@ -1,11 +1,11 @@
 <md-card class="weather-view">
   <div *ngIf="weatherForecast && weatherForecastFirst">
 
-    <div fxLayout="column" fxLayoutAlign="center center" style="margin-bottom:-10px">
-      <p style="font-size: 200%;margin:0px">{{weatherCurrent.name}}</p>
-      <div fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="20px">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <div style="font-size: 150%;margin-bottom:10px">{{weatherCurrent.name}}</div>
+      <div fxLayout="row" fxLayoutAlign="stretch stretch" fxLayoutGap="20px">
         <i class={{weatherCurrent.weather[0].id}} style="font-size: 400%"></i>
-        <p style="font-size: 200%">{{weatherCurrent.main.temp | number: '.0-0'}} °C</p>
+        <div style="font-size: 200%">{{weatherCurrent.main.temp | number: '.0-0'}} °C</div>
       </div>
     </div>
 
