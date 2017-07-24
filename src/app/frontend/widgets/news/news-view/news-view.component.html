@@ -3,13 +3,9 @@
   <p *ngIf="!feedRss">
     Keine News
   </p>
-  <div *ngIf="feedRss">
-    <h4 md-line>Quelle: {{feedRss.feed.title}}</h4>
-    <div fxLayout="column" fxLayoutAlign="stretch stretch" *ngFor="let items of feedRss.items">
-      <div class="newsEntry">
-        <div class="date">{{items.pubDate | date:'HH:mm'}}</div>
-        <p class="title">{{items.title}}</p>
-      </div>
+  <div *ngIf="feedRss" fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="10px">
+    <div class="newsEntry" *ngFor="let items of feedRss.items">
+      <span style="color:grey">{{items.pubDate | date:'HH:mm'}}</span> {{items.title}}
     </div>
   </div>
 </md-card>
