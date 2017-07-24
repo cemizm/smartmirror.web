@@ -3,9 +3,9 @@
     <div style="font-size: 300%; text-align: right" fxFlex>
       {{date | date: 'HH:mm'}}<span style="font-size: 50%; color: grey; margin-left: 2px">{{date | date: 'ss'}}</span>
     </div>
-    <div style="font-size: 120%; text-align: right" fxFlex="30%">
-      {{date.toLocaleString('de-de', { weekday: 'long' })}}<br>
-      <span style="color:gray">{{date | date: 'dd.'}} {{date.toLocaleString('de-de', { month: 'long' })}}</span>
+    <div style="font-size: 120%;" fxFlex="30%" fxLayout="column" fxLayoutAlign="stretch end">
+      <span>{{date | amDateFormat:'dddd'}}</span>
+      <span style="color:gray">{{date | amDateFormat: 'DD. MMMM'}}</span>
     </div>
   </div>
 </md-card>
