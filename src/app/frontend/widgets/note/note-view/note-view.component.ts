@@ -24,6 +24,8 @@ export class NoteViewComponent implements OnInit {
     if (!this.setting || !this.setting.oAuthToken || !this.setting.taskListId) {
       return;
     }
-    this.taskService.list(this.setting.oAuthToken, this.setting.taskListId).subscribe(data => this.taskList = data);
+    this.taskService.list(this.setting.oAuthToken, this.setting.taskListId).subscribe(data => {
+      this.taskList = data.slice(0, this.setting.maxCount);
+    });
   }
 }
