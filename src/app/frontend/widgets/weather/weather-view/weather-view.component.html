@@ -1,18 +1,15 @@
 <md-card class="weather-view">
-  <div *ngIf="weatherForecast && weatherForecastFirst" fxLayout="column" fxLayoutAlign="stretch stretch">
-    <md-grid-list cols="3" rowHeight="80px" *ngIf="weatherCurrent">
-      <md-grid-tile colspan=3 rowspan=1 style="font-size: 200%">
-        {{weatherCurrent.name}}
-      </md-grid-tile>
-      <md-grid-tile colspan=1 rowspan=1>
-        <i class={{weatherCurrent.weather[0].id}} style="font-size: 400%"></i>
-      </md-grid-tile>
-      <md-grid-tile colspan=2 rowspan=1 style="font-size: 200%">
-        {{weatherCurrent.main.temp | number: '.0-0'}} °C
-      </md-grid-tile>
-    </md-grid-list>
+  <div *ngIf="weatherForecast && weatherForecastFirst">
 
-    <div fxLayout="row" fxLayoutAlign="stretch stretch" fxLayoutGap="5px" style="margin-top: 10px">
+    <div fxLayout="column" fxLayoutAlign="center center" style="margin-bottom:-10px">
+      <p style="font-size: 200%;margin:0px">{{weatherCurrent.name}}</p>
+      <div fxLayout="row" fxLayoutAlign="stretch center" fxLayoutGap="20px">
+        <i class={{weatherCurrent.weather[0].id}} style="font-size: 400%"></i>
+        <p style="font-size: 200%">{{weatherCurrent.main.temp | number: '.0-0'}} °C</p>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="stretch stretch" fxLayoutGap="5px">
       <div fxLayout="column" fxLayoutAlign="stretch center" fxFlex
            *ngFor="let weatherItem of weatherForecastFirst.weatherList">
         <div style="color: grey;font-size:80%;margin-bottom: 3px">{{weatherItem.dt | date:'HH:mm'}}</div>
@@ -22,7 +19,7 @@
       </div>
     </div>
 
-    <div fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="5px" style="margin-top: 10px">
+    <div fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="5px" style="margin-top: 20px">
       <div fxLayout="row" fxLayoutAlign="stretch stretch" *ngFor="let weatherItem of weatherForecast.weatherList">
         <div style="color: grey; text-align: left" fxFlex>{{weatherItem.dt | date:'EEEE'}}</div>
         <i class={{weatherItem.weatherinformation.id}} style="font-size: 150%; text-align: center" fxFlex></i>
