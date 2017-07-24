@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NoteViewComponent } from './note-view.component';
+import {SharedModule} from "../../../../shared/shared.module";
 
 describe('NoteViewComponent', () => {
   let component: NoteViewComponent;
@@ -8,7 +9,8 @@ describe('NoteViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NoteViewComponent ]
+      declarations: [ NoteViewComponent ],
+      imports: [SharedModule]
     })
     .compileComponents();
   }));

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MailViewComponent } from './mail-view.component';
+import {SharedModule} from "../../../../shared/shared.module";
 
 describe('MailViewComponent', () => {
   let component: MailViewComponent;
@@ -8,7 +9,8 @@ describe('MailViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MailViewComponent ]
+      declarations: [ MailViewComponent ],
+      imports: [SharedModule]
     })
     .compileComponents();
   }));

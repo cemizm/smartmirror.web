@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WeatherViewComponent } from './weather-view.component';
+import {SharedModule} from "../../../../shared/shared.module";
 
 describe('WeatherViewComponent', () => {
   let component: WeatherViewComponent;
@@ -8,7 +9,8 @@ describe('WeatherViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WeatherViewComponent ]
+      declarations: [ WeatherViewComponent ],
+      imports: [SharedModule]
     })
     .compileComponents();
   }));
