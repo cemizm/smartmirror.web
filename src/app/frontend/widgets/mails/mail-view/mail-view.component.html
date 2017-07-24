@@ -1,8 +1,8 @@
 <md-card class="mail">
-  <p *ngIf="!mails">
-    Keine Mails
+  <p *ngIf="!mails || mails.length == 0">
+    Keine neuen E-Mails
   </p>
-  <div *ngIf="mails" fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="15px">
+  <div *ngIf="mails && mails.length > 0" fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="15px">
     <div *ngFor="let item of mails" fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="3px">
       <div fxLayout="row" fxLayoutAlign="center center">
         <div fxFlex style="font-size: 90%;">{{item.from}}</div>
