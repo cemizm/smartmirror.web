@@ -32,8 +32,11 @@ export class MailViewComponent implements OnInit {
     if (!this.setting || !this.setting.oAuthToken) {
       return;
     }
-    this.mailService.getMails(this.setting.oAuthToken, this.setting.maxCount).subscribe(mails => {
+    this.mailService.getMails(this.setting.oAuthToken, this.setting.maxCount, this.setting.unread).subscribe(mails => {
       this.mails = new Array<MailItem>();
+      if (this.setting.unread === false) {
+        mails = mails.filter(mail => mail.labelIds.includes("UNREAD"));
+      }
 
       for (const item of mails) {
         let subject: string = null;
