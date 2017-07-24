@@ -16,6 +16,9 @@ import {DataCacheService} from "./services/data-cache.service";
 import {MirrorSettingService} from "./services/mirror-setting.service";
 import {MirrorPipe} from "./utils/mirror.pipe";
 import {MomentModule} from "angular2-moment";
+import * as moment from "moment";
+
+moment.locale("de-de");
 
 @NgModule({
   imports: [
