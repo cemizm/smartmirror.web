@@ -4,7 +4,7 @@
   </p>
   <div *ngIf="feedRss" fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="10px">
     <div class="newsEntry" *ngFor="let items of feedRss.items">
-      <span style="color:grey">{{items.pubDate | date:'HH:mm'}}</span> {{items.title}}
+      <span style="color:grey">{{items.pubDate | amAdd:2:'hours' | amDateFormat:'LT'}}</span> {{items.title}}
     </div>
   </div>
 </md-card>
