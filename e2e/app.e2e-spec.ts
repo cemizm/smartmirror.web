@@ -2,6 +2,7 @@ import {SmartMirrorPage} from "./app.po";
 import {MirrorClient} from "./utils/mirror.client";
 import {browser, protractor} from "protractor";
 import {StorageHelper} from "./utils/storage.helper";
+import {count} from "rxjs/operator/count";
 
 describe('smart-mirror App', () => {
   var EC = protractor.ExpectedConditions;
@@ -19,17 +20,6 @@ describe('smart-mirror App', () => {
     storageHelper = new StorageHelper();
   });
 
-  afterEach(() => {
-    browser.manage().logs().get('browser').then(function (browserLog) {
-      console.log('log: ' + require('util').inspect(browserLog));
-    });
-  });
-
-  function log(arg) {
-    browser.call(function () {
-      console.log(arg);
-    });
-  }
 
   it('should provide the browser title', () => {
     page.navigateTo();
@@ -56,8 +46,39 @@ describe('smart-mirror App', () => {
     expect(regRes.statusCode).toBe(200, "Registering mirror failed");
   });
 
-  it('should show widgets', async() => {
-    browser.wait(EC.presenceOf(page.getTodayWidget()), 25000);
+  it('should render left container',  () => {
+    browser.sleep(1000);
+    browser.waitForAngularEnabled(false);
+    expect(page.getLeftContainer()).toBeTruthy();
   });
+
+  it('should render right container', () => {
+
+    expect(page.getRightContainer()).toBeTruthy();
+
+  });
+
+  it('should show widgets', () => {
+    expect(page.getTodayWidget()).toBeTruthy();
+    expect(page.getWeatherWidget()).toBeTruthy();
+    expect(page.getCalendarWidget()).toBeTruthy();
+    expect(page.getNewsWidget()).toBeTruthy();
+    expect(page.getMailWidget()).toBeTruthy();
+    expect(page.getNoteWidget()).toBeTruthy();
+    //browser.wait(EC.presenceOf(page.getTodayWidget()), 25000);
+  });
+
+  it('should render 3 news entries', () => {
+    let newsEntries = page.getNewsEntries().count();
+    expect(newsEntries).toBe(3);
+
+  });
+
+  it('should not render 4 news entries', () => {
+    let newsEntries = page.getNewsEntries().count();
+    expect(newsEntries).not.toBe(4);
+
+  });
+
 
 });
