@@ -1,6 +1,6 @@
 import * as rm from 'typed-rest-client/RestClient';
 import {LoginResponse, User, Widget} from "@cemizm/smartmirror-shared";
-import {Observable} from "rxjs/Observable";
+import {Observable} from "rxjs/Rx";
 import 'rxjs/add/observable/fromPromise';
 
 interface Cred {

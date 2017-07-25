@@ -1,6 +1,4 @@
 import { SmartMirrorPage } from './app.po';
-import {Observable} from "rxjs/Observable";
-import {User} from "@cemizm/smartmirror-shared";
 import {MirrorClient} from "./utils/mirror.client";
 
 describe('smart-mirror App', () => {
@@ -26,14 +24,13 @@ describe('smart-mirror App', () => {
     page.navigateTo();
     expect(page.getTicketNumber()).toMatch(/\w{5}/);
   });
-
-  /*
+  
   it('should login into backend', () => {
     page.navigateTo();
-    mirrorclient.login("test@test.de", "test").subscribe( (res) => {
-      expect(res.user).toEqual({name: "test"});
+    mirrorclient.login("test@test.de", "098f6bcd4621d373cade4e832627b4f6").subscribe( (res) => {
+      expect(res.user).toEqual("test@test.de");
     });
   });
-  */
+
 
 });
