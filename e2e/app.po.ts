@@ -24,4 +24,8 @@ export class SmartMirrorPage {
   getRightContainer() {
     return element(by.css('app-home > div > div:last-child')).getText();
   }
+
+  getTodayWidget() {
+    return element(by.css('app-today')).getText();
+  }
 }

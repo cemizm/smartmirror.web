@@ -2,6 +2,7 @@ import * as rm from 'typed-rest-client/RestClient';
 import {LoginResponse, User, Widget} from "@cemizm/smartmirror-shared";
 import {Observable} from "rxjs/Rx";
 import 'rxjs/add/observable/fromPromise';
+import {IRequestOptions} from "typed-rest-client/RestClient";
 
 interface Cred {
   User: string;
@@ -32,12 +33,9 @@ export class MirrorClient {
 
   }
 
-  login(user: string, pass: string): Observable<User> {
+  login(user: string, pass: string): Observable<LoginResponse> {
     const cred = <Cred>{User: user, Password: pass};
-    return Observable.fromPromise(this.client.create<LoginResponse>('/api/auth/', cred)).map(res => {
-      this.accessToken = res.result.accessToken;
-      return <User>res.result;
-    });
+    return Observable.fromPromise(this.client.create<LoginResponse>('/api/auth/', cred)).map(res => <LoginResponse>res.result);
   }
 
   getMirror(mirrorId: string): Observable<Mirror> {
@@ -58,9 +56,12 @@ export class MirrorClient {
     });
   }
 
-  registerMirror(number: string): Observable<Mirror> {
+  registerMirror(number: string, accessToken: string): Observable<Mirror> {
     const ticket = <Ticket>{number: number};
-    return Observable.fromPromise(this.client.get('/api/tickets', ticket)).map(res => <Mirror>res.result);
+    const header = <IRequestOptions>{
+      Authorization: "Bearer " + accessToken
+    };
+    return Observable.fromPromise(this.client.create<Mirror>('/api/tickets', ticket, header)).map(res => <Mirror>res.result);
   }
 
 }
