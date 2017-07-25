@@ -1,67 +1,43 @@
-import * as rm from 'typed-rest-client/RestClient';
-import {LoginResponse, User, Widget} from "@cemizm/smartmirror-shared";
-import {Observable} from "rxjs/Rx";
-import 'rxjs/add/observable/fromPromise';
-import {IRequestOptions} from "typed-rest-client/RestClient";
+import * as rm from "typed-rest-client/RestClient";
+import {IRequestOptions, IRestResponse} from "typed-rest-client/RestClient";
+import {LoginResponse, LoginRequest, Mirror} from "@cemizm/smartmirror-shared";
+import "rxjs/add/observable/fromPromise";
 
-interface Cred {
-  User: string;
-  Password: string;
-}
-
-interface Mirror {
-  id: string;
-  user: string;
-  name: string;
-  image: string;
-  widgets: Array<Widget>;
-}
-
-interface Ticket {
-  number: string;
-  mirrorId: string;
-}
 
 export class MirrorClient {
 
   private client: rm.RestClient;
   private accessToken: string;
-  private mirror: Mirror;
 
   constructor() {
     this.client = new rm.RestClient('rest-samples', 'https://sm-webapi.azurewebsites.net');
-
   }
 
-  login(user: string, pass: string): Observable<LoginResponse> {
-    const cred = <Cred>{User: user, Password: pass};
-    return Observable.fromPromise(this.client.create<LoginResponse>('/api/auth/', cred)).map(res => <LoginResponse>res.result);
-  }
-
-  getMirror(mirrorId: string): Observable<Mirror> {
-    const mirror = <Mirror>{id: mirrorId};
-    return Observable.fromPromise(this.client.get('/api/mirrors', mirror)).map(res => <Mirror>res.result);
-  }
-
-  updateMirror(mirror: Mirror): Observable<void> {
-    const mirrorTest = <Mirror>{
-      id: mirror.id,
-      name: mirror.name,
-      user: mirror.user,
-      image: mirror.image,
-      widgets: mirror.widgets
+  private getOptions(): IRequestOptions {
+    return {
+      additionalHeaders: {
+        Authorization: "Bearer " + this.accessToken
+      }
     };
-    return Observable.fromPromise(this.client.replace('/api/mirrors', mirrorTest)).map(res => {
-      this.mirror = <Mirror>res.result;
-    });
   }
 
-  registerMirror(number: string, accessToken: string): Observable<Mirror> {
-    const ticket = <Ticket>{number: number};
-    const header = <IRequestOptions>{
-      Authorization: "Bearer " + accessToken
-    };
-    return Observable.fromPromise(this.client.create<Mirror>('/api/tickets', ticket, header)).map(res => <Mirror>res.result);
+  login(user: string, pass: string): Promise<IRestResponse<LoginResponse>> {
+    return this.client.create<LoginResponse>('/api/auth/', <LoginRequest>{user: user, password: pass}).then(res => {
+      this.accessToken = res.result.accessToken;
+      return res;
+    })
+  }
+
+  getMirror(mirrorId: string): Promise<IRestResponse<Mirror>> {
+    return this.client.get<Mirror>('/api/mirrors/' + mirrorId);
+  }
+
+  updateMirror(mirror: Mirror): Promise<IRestResponse<any>> {
+    return this.client.replace<any>('/api/mirrors', mirror);
+  }
+
+  registerMirror(number: string): Promise<IRestResponse<Mirror>> {
+    return this.client.create<Mirror>('/api/tickets/' + number, null, this.getOptions());
   }
 
 }

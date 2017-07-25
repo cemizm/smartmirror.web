@@ -1,4 +1,4 @@
-import {browser, by, element} from 'protractor';
+import {browser, by, element} from "protractor";
 
 export class SmartMirrorPage {
   navigateTo() {
@@ -26,6 +26,6 @@ export class SmartMirrorPage {
   }
 
   getTodayWidget() {
-    return element(by.css('app-today')).getText();
+    return element(by.css('app-today'));
   }
 }
