@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnInit, OnDestroy} from "@angular/core";
 import {MailSettings} from "@cemizm/smartmirror-shared";
 import {Observable} from "rxjs/Observable";
 import {MailService} from "../mail.service";
+import {Subscription} from "rxjs";
 
 const interval = 5000;
 
@@ -17,15 +18,22 @@ interface MailItem {
   templateUrl: './mail-view.component.html',
   styleUrls: ['./mail-view.component.scss']
 })
-export class MailViewComponent implements OnInit {
+export class MailViewComponent implements OnDestroy, OnInit {
   @Input() setting: MailSettings | MailSettings;
+
   private mails: Array<MailItem>;
+  private sub: Subscription;
 
   constructor(private mailService: MailService) {
   }
 
   ngOnInit() {
-    Observable.timer(0, interval).subscribe(() => this.update());
+    this.sub = Observable.timer(0, interval).subscribe(() => this.update());
+  }
+
+  ngOnDestroy() {
+    if (this.sub)
+      this.sub.unsubscribe();
   }
 
   update() {
