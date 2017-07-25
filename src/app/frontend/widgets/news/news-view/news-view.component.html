@@ -3,8 +3,15 @@
     Keine News
   </p>
   <div *ngIf="feedRss" fxLayout="column" fxLayoutAlign="stretch stretch" fxLayoutGap="10px">
-    <div class="newsEntry" *ngFor="let items of feedRss.items">
-      <span style="color:grey">{{items.pubDate | amDateFormat:'LT'}}</span> {{items.title}}
+    <div class="newsEntry" *ngFor="let items of feedRss.items" fxLayout="column" fxLayoutAlign="stretch stretch"
+         fxLayoutGap="0px">
+      <div fxLayout="row" fxLayoutAlign="stretch stretch" fxLayoutGap="3px">
+        <div fxFlex>{{items.title}}</div>
+        <div style="color:grey; font-size: 90%; text-align: right" fxFlex="60px">{{items.pubDate | amDateFormat:'LT'}}
+        </div>
+      </div>
+      <div style="font-size: 80%; max-height: 32px; overflow: hidden; color:gray">{{items.description}}
+      </div>
     </div>
   </div>
 </md-card>
