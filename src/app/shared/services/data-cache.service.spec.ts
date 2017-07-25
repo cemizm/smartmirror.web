@@ -1,11 +1,12 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { DataCacheService } from './data-cache.service';
+import {StorageService} from "@cemizm/smartmirror-shared";
 
 describe('DataCacheService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DataCacheService]
+      providers: [DataCacheService, StorageService]
     });
   });
 

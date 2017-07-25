@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewsViewComponent } from './news-view.component';
 import {SharedModule} from "../../../../shared/shared.module";
+import {NewsService} from "../news.service";
 
 describe('NewsViewComponent', () => {
   let component: NewsViewComponent;
@@ -10,7 +11,8 @@ describe('NewsViewComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ NewsViewComponent ],
-      imports: [SharedModule]
+      imports: [SharedModule],
+      providers: [NewsService]
     })
     .compileComponents();
   }));

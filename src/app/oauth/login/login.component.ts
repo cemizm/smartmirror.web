@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {FormGroup, FormControl, Validators} from "@angular/forms";
+import {FormGroup, FormControl, Validators, ReactiveFormsModule} from "@angular/forms";
 import {AuthService} from "@cemizm/smartmirror-shared";
 import {Md5} from "ts-md5/dist/md5";
 import {ActivatedRoute, Params, Router} from "@angular/router";
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     this.svc.login(val.user, <string>Md5.hashStr(val.password)).subscribe(res=> {
 
       window.location.href = this.redirect_uri + "?state=" + this.state + "&code=" + res.accessToken;
-      
+
     }, err=> {
       this.form.enable();
     });
