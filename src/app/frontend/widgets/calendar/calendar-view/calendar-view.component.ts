@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnInit, OnDestroy} from "@angular/core";
 import {CalendarSettings, Event, EventsService} from "@cemizm/smartmirror-shared";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 
 const UPDATE_INTERVAL = 1000 * 60 * 1 / 12;
 
@@ -14,8 +14,9 @@ interface GroupedEvent {
   templateUrl: './calendar-view.component.html',
   styleUrls: ['./calendar-view.component.scss']
 })
-export class CalendarViewComponent implements OnInit {
+export class CalendarViewComponent implements OnDestroy, OnInit {
   private events: Array<GroupedEvent>;
+  private sub: Subscription;
 
   @Input() setting: CalendarSettings | CalendarSettings;
 
@@ -23,7 +24,12 @@ export class CalendarViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    Observable.timer(0, UPDATE_INTERVAL).subscribe(() => this.update());
+    this.sub = Observable.timer(0, UPDATE_INTERVAL).subscribe(() => this.update());
+  }
+
+  ngOnDestroy() {
+    if (this.sub)
+      this.sub.unsubscribe();
   }
 
   update() {
