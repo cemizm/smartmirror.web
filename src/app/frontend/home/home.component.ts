@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   private ticket: Ticket;
   private mirror: Mirror;
   private theme = "smartmirror-theme";
+  private off: boolean;
 
   constructor(private ms: MirrorService, private mss: MirrorSettingService, private ts: TicketService, private ngZone: NgZone) {
   }
@@ -40,10 +41,10 @@ export class HomeComponent implements OnInit {
     this.ms.watchControlRequest(this.mss.getId()).subscribe(control => {
       switch (control.action) {
         case "TurnOnRequest":
-          this.theme = "tv-theme";
+          this.off = false;
           break;
         case "TurnOffRequest":
-          this.theme = "smartmirror-theme";
+          this.off = true;
           break;
       }
     });
